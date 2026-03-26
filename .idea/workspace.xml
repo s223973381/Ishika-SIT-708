@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9d31eae-1e85-4538-ac13-3606d797c332" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Task2.1P/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Task2.1P/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task2.1P/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Task2.1P/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task2.1P/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Task2.1P/.idea/misc.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;s223973381&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/s223973381/Ishika-SIT-708.git&quot;,
+    &quot;accountId&quot;: &quot;231a962e-cd20-4662-b45a-3dc047661166&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3ASrQu4Gz8qWeJNwgCie3pkUgTJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ishik/StudioProjects/Ishika-SIT-708"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9d31eae-1e85-4538-ac13-3606d797c332" name="Changes" comment="" />
+      <created>1772596800597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772596800597</updated>
+    </task>
+    <servers />
+  </component>
+</project>
