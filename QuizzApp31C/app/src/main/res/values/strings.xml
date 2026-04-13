@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">QuizApp31C</string>
+    <string name="quiz_app">Quiz App</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="start">Start</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="take_new_quiz">Take New Quiz</string>
+    <string name="finish">Finish</string>
+    <string name="choose_category">Choose a Category</string>
+</resources>
