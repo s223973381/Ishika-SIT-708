@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sports News Feed</string>
+
+    <string name="featured_matches">Featured Matches</string>
+    <string name="latest_sports_news">Latest Sports News</string>
+    <string name="search_hint">Search by sport category</string>
+
+    <string name="bookmark">Bookmark</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmarked_stories">Bookmarked Stories</string>
+    <string name="related_stories">Related Stories</string>
+
+    <string name="football">Football</string>
+    <string name="basketball">Basketball</string>
+    <string name="cricket">Cricket</string>
+
+    <string name="bookmark_updated">Bookmark updated</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#FFF"
+    android:padding="14dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical"
+    android:elevation="2dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/tvPlaylistUrl"
+        android:textColor="#1565C0"
+        android:textSize="13sp"
+        android:maxLines="2"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="▶"
+        android:textSize="18sp"
+        android:textColor="#E53935"
+        android:paddingStart="8dp"/>
+
+</LinearLayout>
