@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="event_categories">
+        <item>Select category</item>
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Health</item>
+        <item>Social</item>
+    </string-array>
+</resources>

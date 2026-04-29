@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8B5CF6</color>
+    <color name="colorPrimaryDark">#6D28D9</color>
+    <color name="colorSecondary">#14B8A6</color>
+
+    <color name="screen_bg">#0F0F13</color>
+    <color name="card_bg">#151521</color>
+    <color name="card_stroke">#2B2B3D</color>
+
+    <color name="text_primary">#F5F3FF</color>
+    <color name="text_secondary">#A1A1BF</color>
+    <color name="text_muted">#7C7C99</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="work_color">#8B5CF6</color>
+    <color name="personal_color">#22C55E</color>
+    <color name="health_color">#14B8A6</color>
+    <color name="social_color">#EC4899</color>
+
+    <color name="meta_pill_bg">#1D1D2A</color>
+    <color name="input_bg">#171722</color>
+    <color name="input_stroke">#2E2E45</color>
+
+    <color name="button_light_bg">#F5F1EB</color>
+    <color name="button_light_text">#2C2C2C</color>
+
+    <color name="bottom_nav_inactive">#7C7C99</color>
+    <color name="bottom_nav_active">#A78BFA</color>
+</resources>

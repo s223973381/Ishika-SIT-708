@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="off_white">#FAF7F2</color>
+    <color name="dark_background">#121212</color>
+    <color name="soft_magenta">#C2185B</color>
+    <color name="soft_magenta_dark">#8E1243</color>
+    <color name="soft_pink">#F8D7E6</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="green_correct">#4CAF50</color>
+    <color name="red_wrong">#F44336</color>
+    <color name="gray_text">#666666</color>
+    <color name="gray_text_light">#AAAAAA</color>
+    <color name="dark_card_bg">#1E1E1E</color>
+    <color name="option_bg">#FFFFFFFF</color>
+</resources>
