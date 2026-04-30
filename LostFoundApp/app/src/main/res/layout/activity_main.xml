@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lost &amp; Found"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect lost items to their owners"
+        android:textSize="14sp"
+        android:textColor="#CCE3FF"
+        android:layout_marginBottom="60dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create_advert"
+        android:layout_width="260dp"
+        android:layout_height="56dp"
+        android:text="CREATE A NEW ADVERT"
+        android:textSize="14sp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="20dp"
+        app:cornerRadius="28dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_show_items"
+        android:layout_width="260dp"
+        android:layout_height="56dp"
+        android:text="SHOW ALL LOST &amp; FOUND ITEMS"
+        android:textSize="14sp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:textColor="@color/white"
+        app:strokeColor="@color/white"
+        app:cornerRadius="28dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+</LinearLayout>

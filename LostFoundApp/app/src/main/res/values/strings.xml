@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lost &amp; Found</string>
+    <string name="create_advert">Create a New Advert</string>
+    <string name="show_all_items">Show All Lost &amp; Found Items</string>
+    <string name="post_type">Post Type</string>
+    <string name="lost">Lost</string>
+    <string name="found">Found</string>
+    <string name="category">Category</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="save">SAVE</string>
+    <string name="remove">REMOVE</string>
+    <string name="search_hint">Search by name, description…</string>
+    <string name="filter_by_category">Filter by category</string>
+    <string name="lost_found_items">LOST &amp; FOUND ITEMS</string>
+    <string name="no_items">No items found</string>
+    <string name="item_saved">Item saved successfully!</string>
+    <string name="item_removed">Item removed</string>
+    <string name="select_lost_found">Please select Lost or Found</string>
+    <string name="image_required">Please upload an image</string>
+    <string name="name_required">Name is required</string>
+    <string name="posted">Posted: </string>
+</resources>
