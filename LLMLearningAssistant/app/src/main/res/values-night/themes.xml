@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Force light pastel theme even in dark mode so palette is preserved -->
+    <style name="Base.Theme.LLMLearningAssistant" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/coral</item>
+        <item name="colorPrimaryDark">@color/coral_dark</item>
+        <item name="colorAccent">@color/mint</item>
+        <item name="android:windowBackground">@color/mint</item>
+    </style>
+
+    <style name="Theme.LLMLearningAssistant" parent="Base.Theme.LLMLearningAssistant" />
+</resources>
