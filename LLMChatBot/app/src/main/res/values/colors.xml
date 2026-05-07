@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#9B89C4</color>
+    <color name="primary_dark">#7B68AA</color>
+    <color name="primary_light">#C5B9E0</color>
+    <color name="accent">#B8ADDB</color>
+    <color name="gradient_start">#EDE7F6</color>
+    <color name="gradient_end">#C5B9E0</color>
+    <color name="user_bubble">#9B89C4</color>
+    <color name="bot_bubble">#FAF9FF</color>
+    <color name="user_text">#FFFFFF</color>
+    <color name="bot_text">#2D2D2D</color>
+    <color name="timestamp_text">#A89CC8</color>
+    <color name="input_bg">#FAF9FF</color>
+    <color name="toolbar_bg">#7B68AA</color>
+    <color name="chat_bg">#F4F0FB</color>
+    <color name="send_button">#9B89C4</color>
+</resources>
