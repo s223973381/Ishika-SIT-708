@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow cleartext HTTP for local Ollama (10.0.2.2 = emulator host, LAN IPs) -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

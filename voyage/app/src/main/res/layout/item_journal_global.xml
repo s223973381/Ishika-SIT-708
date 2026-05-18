@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/voyage_warm_white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Mood/emoji circle -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardBackgroundColor="@color/voyage_card_bg"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tvMood"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="📝"
+                android:textSize="22sp" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Trip name label -->
+            <TextView
+                android:id="@+id/tvTripName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:text="Trip"
+                android:textColor="@color/voyage_crimson"
+                android:textSize="11sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tvEntryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Day 1 at the beach"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEntryPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="What an amazing day it was..."
+                android:textColor="@color/voyage_text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvEntryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="May 2025"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="›"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="22sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

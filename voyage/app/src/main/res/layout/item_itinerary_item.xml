@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Day header (shown when day changes) -->
+    <TextView
+        android:id="@+id/tvDayHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_chip_selected"
+        android:fontFamily="sans-serif-medium"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
+        android:text="Day 1"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <!-- Item card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_card_rounded"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Time slot indicator -->
+        <LinearLayout
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_chip"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTimeSlotEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌅"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvTimeSlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AM"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Visit the museum"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvItemLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="📍 City Centre"
+                android:textColor="@color/voyage_text_secondary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvItemTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="10:00 – 12:00"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Cost + delete -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvItemCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="$20"
+                android:textColor="@color/voyage_crimson"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btnDeleteItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="4dp"
+                android:text="✕"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

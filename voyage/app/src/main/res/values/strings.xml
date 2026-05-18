@@ -1,0 +1,168 @@
+<resources>
+    <string name="app_name">Voyage</string>
+    <string name="app_tagline">AI Travel Companion</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_title_1">Plan with AI</string>
+    <string name="onboard_desc_1">Let our AI craft your perfect itinerary — just tell it where, when, and how you like to travel.</string>
+    <string name="onboard_title_2">Works Offline</string>
+    <string name="onboard_desc_2">Your plans, checklists, and journal are always available — even without internet.</string>
+    <string name="onboard_title_3">Smart Suggestions</string>
+    <string name="onboard_desc_3">Get context-aware tips based on your location, weather, time, and travel mood.</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+
+    <!-- Auth -->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="google_login">Continue with Google</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="no_account">Don\'t have an account? Register</string>
+    <string name="have_account">Already have an account? Login</string>
+    <string name="name">Full Name</string>
+
+    <!-- Home -->
+    <string name="greeting_hi">Hi, %s</string>
+    <string name="plan_trip">Plan Trip</string>
+    <string name="ask_ai">Ask AI</string>
+    <string name="nearby">Nearby</string>
+    <string name="emergency">Emergency</string>
+    <string name="upcoming_trips">Upcoming Trips</string>
+    <string name="suggestions">Suggestions for You</string>
+    <string name="no_upcoming_trips">No upcoming trips. Plan one!</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_evening">Good Evening</string>
+
+    <!-- Trips -->
+    <string name="my_trips">My Trips</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="completed">Completed</string>
+    <string name="create_new_trip">+ Create New Trip</string>
+    <string name="no_trips">No trips yet. Start planning!</string>
+    <string name="days">days</string>
+    <string name="budget_label">Budget</string>
+
+    <!-- Create Trip -->
+    <string name="create_trip">Create New Trip</string>
+    <string name="destination">Destination</string>
+    <string name="number_of_days">Number of Days</string>
+    <string name="budget">Budget ($)</string>
+    <string name="travel_style">Travel Style</string>
+    <string name="interests">Interests</string>
+    <string name="ai_mode">AI Mode</string>
+    <string name="offline_ollama">Offline (Ollama)</string>
+    <string name="online_chatgpt">Online (ChatGPT)</string>
+    <string name="auto">Auto</string>
+    <string name="generate_plan">Generate Plan</string>
+    <string name="relax">Relax</string>
+    <string name="adventure">Adventure</string>
+    <string name="culture">Culture</string>
+    <string name="budget_travel">Budget</string>
+    <string name="luxury">Luxury</string>
+    <string name="food">Food</string>
+    <string name="nature">Nature</string>
+    <string name="history">History</string>
+    <string name="nightlife">Nightlife</string>
+    <string name="shopping">Shopping</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+
+    <!-- Trip Detail -->
+    <string name="overview">Overview</string>
+    <string name="itinerary">Itinerary</string>
+    <string name="map">Map</string>
+    <string name="budget_tab">Budget</string>
+    <string name="checklist">Checklist</string>
+    <string name="journal">Journal</string>
+    <string name="edit">Edit</string>
+    <string name="share">Share</string>
+    <string name="download">Download</string>
+    <string name="ask_ai_btn">Ask AI</string>
+
+    <!-- Budget -->
+    <string name="total_budget">Total Budget</string>
+    <string name="spent">Spent</string>
+    <string name="remaining">Remaining</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="expense_title">Title</string>
+    <string name="expense_amount">Amount</string>
+    <string name="expense_category">Category</string>
+    <string name="expense_note">Note (optional)</string>
+
+    <!-- Checklist -->
+    <string name="add_item">Add Item</string>
+    <string name="ai_tip">AI Tip</string>
+
+    <!-- Journal -->
+    <string name="add_entry">Add Entry</string>
+    <string name="ai_summary">AI Summary</string>
+    <string name="photo">Add Photo</string>
+
+    <!-- Map -->
+    <string name="explore_map">Explore Map</string>
+    <string name="search_places">Search places…</string>
+    <string name="filters">Filters</string>
+
+    <!-- AI Chat -->
+    <string name="ai_assistant">Voyage AI</string>
+    <string name="ai_greeting">How can I help with your travels?</string>
+    <string name="type_message">Type a message…</string>
+    <string name="mode">Mode</string>
+    <string name="plan_day">Plan my day</string>
+    <string name="cheap_food">Cheap food nearby</string>
+    <string name="translate">Translate phrase</string>
+    <string name="whats_nearby">What to do nearby?</string>
+
+    <!-- Emergency -->
+    <string name="emergency_help">Emergency Help</string>
+    <string name="call_000">Call 000</string>
+    <string name="nearby_hospital">Nearby Hospital</string>
+    <string name="nearby_police">Nearby Police</string>
+    <string name="share_location">Share My Location</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="add_contact">Add Contact</string>
+
+    <!-- More -->
+    <string name="more">More</string>
+    <string name="account">Account</string>
+    <string name="profile_preferences">Profile &amp; Preferences</string>
+    <string name="privacy_permissions">Privacy &amp; Permissions</string>
+    <string name="trip_tools">Trip Tools</string>
+    <string name="budget_overview">Budget Overview</string>
+    <string name="packing_lists">Packing Lists</string>
+    <string name="travel_journal">Travel Journal</string>
+    <string name="saved_offline">Saved Offline Data</string>
+    <string name="safety">Safety</string>
+    <string name="ai_settings">AI Settings</string>
+    <string name="help_about">Help &amp; About</string>
+    <string name="logout">Logout</string>
+
+    <!-- Profile -->
+    <string name="profile">Profile</string>
+    <string name="travel_style_label">Travel Style</string>
+    <string name="preferences">Preferences</string>
+    <string name="permissions">Permissions</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_trips">Trips</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_ai">AI</string>
+    <string name="nav_more">More</string>
+
+    <!-- Common -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="view">View</string>
+    <string name="loading">Loading…</string>
+    <string name="retry">Retry</string>
+    <string name="ok">OK</string>
+    <string name="done">Done</string>
+    <string name="back">Back</string>
+    <string name="coming_soon">Coming soon</string>
+</resources>

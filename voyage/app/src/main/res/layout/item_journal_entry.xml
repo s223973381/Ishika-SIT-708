@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_card_rounded"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Top row: mood + title + date -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvMoodEmoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_chip"
+            android:gravity="center"
+            android:text="😊"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvEntryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Day at the beach"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvEntryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Jan 14, 2025"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnDeleteEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="4dp"
+            android:text="✕"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Preview text -->
+    <TextView
+        android:id="@+id/tvEntryPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="Today was an amazing day at Bondi Beach. The waves were perfect and the weather couldn't have been better…"
+        android:textColor="@color/voyage_text_secondary"
+        android:textSize="13sp" />
+
+    <!-- Mood badge -->
+    <TextView
+        android:id="@+id/tvMoodBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_chip"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="3dp"
+        android:text="Happy"
+        android:textColor="@color/voyage_text_secondary"
+        android:textSize="11sp" />
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Voyage uses light theme only for now -->
+    <style name="Base.Theme.Voyage" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/voyage_crimson</item>
+        <item name="colorOnPrimary">@color/voyage_text_on_primary</item>
+        <item name="colorPrimaryContainer">@color/voyage_khaki</item>
+        <item name="colorOnPrimaryContainer">@color/voyage_maroon</item>
+        <item name="colorSecondary">@color/voyage_olive_dark</item>
+        <item name="colorOnSecondary">@color/voyage_text_on_primary</item>
+        <item name="android:colorBackground">@color/voyage_cream</item>
+        <item name="colorSurface">@color/voyage_warm_white</item>
+        <item name="colorOnSurface">@color/voyage_text_primary</item>
+        <item name="android:statusBarColor">@color/voyage_maroon</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+</resources>

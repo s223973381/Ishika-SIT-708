@@ -1,0 +1,115 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.Voyage" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary: Crimson Red -->
+        <item name="colorPrimary">@color/voyage_crimson</item>
+        <item name="colorOnPrimary">@color/voyage_text_on_primary</item>
+        <item name="colorPrimaryContainer">@color/voyage_khaki</item>
+        <item name="colorOnPrimaryContainer">@color/voyage_maroon</item>
+
+        <!-- Secondary: Olive -->
+        <item name="colorSecondary">@color/voyage_olive_dark</item>
+        <item name="colorOnSecondary">@color/voyage_text_on_primary</item>
+        <item name="colorSecondaryContainer">@color/voyage_khaki_light</item>
+        <item name="colorOnSecondaryContainer">@color/voyage_olive_dark</item>
+
+        <!-- Tertiary: Khaki -->
+        <item name="colorTertiary">@color/voyage_olive_medium</item>
+        <item name="colorOnTertiary">@color/voyage_text_on_primary</item>
+        <item name="colorTertiaryContainer">@color/voyage_khaki_light</item>
+        <item name="colorOnTertiaryContainer">@color/voyage_maroon</item>
+
+        <!-- Backgrounds -->
+        <item name="android:colorBackground">@color/voyage_cream</item>
+        <item name="colorSurface">@color/voyage_warm_white</item>
+        <item name="colorOnSurface">@color/voyage_text_primary</item>
+        <item name="colorSurfaceVariant">@color/voyage_card_bg</item>
+        <item name="colorOnSurfaceVariant">@color/voyage_text_secondary</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/voyage_error</item>
+        <item name="colorOnError">@color/voyage_text_on_primary</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/voyage_divider</item>
+        <item name="colorOutlineVariant">@color/voyage_khaki_light</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/voyage_maroon</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
+    <style name="Theme.Voyage" parent="Base.Theme.Voyage" />
+
+    <!-- Splash screen theme (no action bar, full crimson bg) -->
+    <style name="Theme.Voyage.Splash" parent="Theme.Voyage">
+        <item name="android:windowBackground">@color/voyage_maroon</item>
+        <item name="android:statusBarColor">@color/voyage_maroon</item>
+        <item name="android:navigationBarColor">@color/voyage_maroon</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="TextStyle.Voyage.Display" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/voyage_text_primary</item>
+    </style>
+
+    <style name="TextStyle.Voyage.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/voyage_text_primary</item>
+    </style>
+
+    <style name="TextStyle.Voyage.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/voyage_text_primary</item>
+    </style>
+
+    <style name="TextStyle.Voyage.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/voyage_text_secondary</item>
+    </style>
+
+    <!-- Card style -->
+    <style name="CardStyle.Voyage" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/voyage_warm_white</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+
+    <!-- Button style -->
+    <style name="ButtonStyle.Voyage.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/voyage_crimson</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <!-- Chip style -->
+    <style name="ChipStyle.Voyage" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@color/voyage_card_bg</item>
+        <item name="chipStrokeColor">@color/voyage_divider</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Tab layout style -->
+    <style name="TabLayoutStyle.Voyage" parent="Widget.Material3.TabLayout">
+        <item name="tabSelectedTextColor">@color/voyage_crimson</item>
+        <item name="tabTextColor">@color/voyage_text_secondary</item>
+        <item name="tabIndicatorColor">@color/voyage_crimson</item>
+        <item name="tabBackground">@android:color/transparent</item>
+        <item name="tabIndicatorHeight">3dp</item>
+    </style>
+
+    <!-- Tab text appearance (used by TabLayouts referencing @style/TabTextAppearance) -->
+    <style name="TabTextAppearance">
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Bottom Navigation style -->
+    <style name="BottomNavStyle.Voyage" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@color/nav_item_color</item>
+        <item name="itemTextColor">@color/nav_item_color</item>
+        <item name="backgroundTint">@color/voyage_warm_white</item>
+    </style>
+
+</resources>

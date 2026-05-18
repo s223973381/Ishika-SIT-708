@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.voyage.ui.home.HomeFragment"
+        android:label="@string/nav_home" />
+
+    <fragment
+        android:id="@+id/nav_trips"
+        android:name="com.example.voyage.ui.trips.TripsFragment"
+        android:label="@string/nav_trips" />
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.example.voyage.ui.map.MapFragment"
+        android:label="@string/nav_map" />
+
+    <fragment
+        android:id="@+id/nav_ai"
+        android:name="com.example.voyage.ui.ai.AiChatFragment"
+        android:label="@string/nav_ai" />
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.example.voyage.ui.more.MoreFragment"
+        android:label="@string/nav_more" />
+
+</navigation>

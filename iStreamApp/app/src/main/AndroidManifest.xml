@@ -23,7 +23,7 @@
         </activity>
 
         <activity android:name=".SignupActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:hardwareAccelerated="true" />
         <activity android:name=".PlaylistActivity" />
 
     </application>

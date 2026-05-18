@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="@color/voyage_warm_white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Avatar circle -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardBackgroundColor="@color/voyage_crimson"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tvContactInitial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="?"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Name + relation + phone -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvContactName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Name"
+                    android:textColor="@color/voyage_text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPrimaryBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_selected"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="Primary"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvContactRelation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Family"
+                android:textColor="@color/voyage_text_secondary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvContactPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="+61 000 000 000"
+                android:textColor="@color/voyage_text_hint"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Call button -->
+        <TextView
+            android:id="@+id/btnCallContact"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_button_crimson"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="📞"
+            android:textSize="16sp" />
+
+        <!-- Delete button -->
+        <TextView
+            android:id="@+id/btnDeleteContact"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="🗑️"
+            android:textSize="16sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

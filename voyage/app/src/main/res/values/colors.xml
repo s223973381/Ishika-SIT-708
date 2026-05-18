@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Voyage Brand Colors -->
+    <color name="voyage_crimson">#8B0000</color>
+    <color name="voyage_crimson_dark">#6B0000</color>
+    <color name="voyage_crimson_light">#B22222</color>
+    <color name="voyage_maroon">#4A0000</color>
+
+    <color name="voyage_olive_dark">#787319</color>
+    <color name="voyage_olive_medium">#9A9347</color>
+    <color name="voyage_khaki">#C3B684</color>
+    <color name="voyage_khaki_light">#DDD5AA</color>
+
+    <!-- Backgrounds -->
+    <color name="voyage_cream">#FAF7EE</color>
+    <color name="voyage_warm_white">#FFFDF8</color>
+    <color name="voyage_card_bg">#F5F0E4</color>
+    <color name="voyage_divider">#E8E0CC</color>
+
+    <!-- Text -->
+    <color name="voyage_text_primary">#1C1000</color>
+    <color name="voyage_text_secondary">#5C4A2A</color>
+    <color name="voyage_text_hint">#9C8A6A</color>
+    <color name="voyage_text_on_primary">#FFFFFF</color>
+
+    <!-- Functional Colors -->
+    <color name="voyage_success">#2E7D32</color>
+    <color name="voyage_warning">#F57C00</color>
+    <color name="voyage_error">#C62828</color>
+    <color name="voyage_info">#1565C0</color>
+
+    <!-- Overlays -->
+    <color name="voyage_scrim">#80000000</color>
+    <color name="voyage_ripple">#20000000</color>
+    <color name="voyage_ripple_light">#208B0000</color>
+
+    <!-- Bottom Nav -->
+    <color name="nav_selected">#8B0000</color>
+    <color name="nav_unselected">#9C8A6A</color>
+
+    <!-- System -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

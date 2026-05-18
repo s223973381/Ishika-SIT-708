@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/voyage_cream"
+    android:overScrollMode="never"
+    android:windowSoftInputMode="adjustResize">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_header_gradient"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="52dp"
+            android:paddingBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="←"
+                    android:textColor="@color/voyage_text_primary"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Plan New Trip"
+                    android:textColor="@color/voyage_text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Fill in the details and we'll set it up for you"
+                android:textColor="@color/voyage_text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- ── DESTINATION ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="DESTINATION"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <EditText
+            android:id="@+id/etDestination"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="e.g. Geelong, Sydney, Bali…"
+            android:inputType="textCapWords"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/voyage_text_primary"
+            android:textColorHint="@color/voyage_text_hint"
+            android:textSize="15sp" />
+
+        <!-- ── TITLE ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="TRIP TITLE (OPTIONAL)"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="e.g. Summer Beach Getaway"
+            android:inputType="textCapWords"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/voyage_text_primary"
+            android:textColorHint="@color/voyage_text_hint"
+            android:textSize="15sp" />
+
+        <!-- ── DATES ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="DATES"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnStartDate"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📅"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start"
+                        android:textColor="@color/voyage_text_hint"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select date"
+                        android:textColor="@color/voyage_text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnEndDate"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📅"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End"
+                        android:textColor="@color/voyage_text_hint"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select date"
+                        android:textColor="@color/voyage_text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDaysCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="6dp"
+            android:text=""
+            android:textColor="@color/voyage_crimson"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- ── BUDGET ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="TOTAL BUDGET (AUD)"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <EditText
+            android:id="@+id/etBudget"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="$ 0.00"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/voyage_text_primary"
+            android:textColorHint="@color/voyage_text_hint"
+            android:textSize="15sp" />
+
+        <!-- ── TRAVEL STYLE ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="TRAVEL STYLE"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/styleRelax"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="😌 Relax"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/styleAdventure"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="🧗 Adventure"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/styleCulture"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="🏛️ Culture"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/styleBudget"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="💸 Budget"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- ── AI MODE ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:text="AI MODE"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="11sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/aiModeAuto"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="🤖 Auto"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/aiModeOffline"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="📴 Offline"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/aiModeOnline"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="🌐 Online"
+                android:textColor="@color/voyage_text_primary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- ── CREATE BUTTON ── -->
+        <TextView
+            android:id="@+id/btnCreateTrip"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_button_crimson"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="✈️  Create Trip"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>
