@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,12 +23,10 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        TextView tvAppName = findViewById(R.id.tvAppName);
-        TextView tvTagline = findViewById(R.id.tvTagline);
+        ImageView ivLogo = findViewById(R.id.ivLogo);
 
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        tvAppName.startAnimation(fadeIn);
-        tvTagline.startAnimation(fadeIn);
+        ivLogo.startAnimation(fadeIn);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             SessionManager session = new SessionManager(this);

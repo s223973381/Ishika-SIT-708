@@ -4,75 +4,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_splash_gradient">
+    android:background="@color/voyage_cream">
 
-    <!-- Logo circle background -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/logoCard"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:cardBackgroundColor="#33FFFFFF"
-        app:cardCornerRadius="60dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@id/tvAppName"
+    <!-- Full Voyage logo (PNG with emblem + VOYAGE text + tagline) -->
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:src="@drawable/ic_voyage_logo"
+        android:scaleType="fitCenter"
+        android:contentDescription="Voyage logo"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.42">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="✈"
-            android:textColor="#FFFFFF"
-            android:textSize="52sp" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.15"
-        android:text="VOYAGE"
-        android:textColor="#FFFFFF"
-        android:textSize="38sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tvTagline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoCard" />
-
-    <TextView
-        android:id="@+id/tvTagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:letterSpacing="0.1"
-        android:text="AI Travel Companion"
-        android:textColor="#CCFFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+        app:layout_constraintVertical_bias="0.42" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="120dp"
         android:layout_height="4dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="48dp"
         android:indeterminate="true"
-        android:indeterminateTint="#C3B684"
-        android:progressBackgroundTint="#4DFFFFFF"
+        android:indeterminateTint="#C4A265"
+        android:progressBackgroundTint="#337B1535"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTagline"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
@@ -80,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Loading…"
-        android:textColor="#80FFFFFF"
+        android:textColor="#807B1535"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

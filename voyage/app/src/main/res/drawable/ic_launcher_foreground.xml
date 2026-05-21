@@ -1,30 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:endX="85.84757"
-                android:endY="92.4963"
-                android:startX="42.9492"
-                android:startY="49.59793"
-                android:type="linear">
-                <item
-                    android:color="#44000000"
-                    android:offset="0.0" />
-                <item
-                    android:color="#00000000"
-                    android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+
+    <!--
+        Voyage logo emblem (launcher icon variant — no text, emblem only).
+        Colours:  burgundy=#7B1535  gold=#C4A265  tan=#D4BB8A  cream=#EAD8B8
+        Circle: center(54,50) radius 32. Arc leaves gap at upper-right for the airplane exit.
+    -->
+
+    <!-- ── Maroon ground / landscape fill (bottom of circle) ── -->
     <path
-        android:fillColor="#FFFFFF"
-        android:fillType="nonZero"
-        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
-        android:strokeWidth="1"
-        android:strokeColor="#00000000" />
+        android:fillColor="#7B1535"
+        android:pathData="M 24,66 Q 39,60 54,64 Q 70,68 84,64 Q 86,74 78,80 Q 68,85 54,85 Q 40,85 30,80 Q 22,74 24,66 Z" />
+
+    <!-- ── Mountains – background peak (tan) ── -->
+    <path
+        android:fillColor="#D4BB8A"
+        android:pathData="M 57,67 L 69,48 L 81,67 Z" />
+
+    <!-- ── Mountains – foreground peak (darker gold) ── -->
+    <path
+        android:fillColor="#C4A265"
+        android:pathData="M 65,67 L 77,42 L 89,67 Z" />
+
+    <!-- ── Snow highlight on foreground peak ── -->
+    <path
+        android:fillColor="#EAD8B8"
+        android:pathData="M 77,42 L 72,52 L 82,52 Z" />
+
+    <!-- ── Winding road through landscape ── -->
+    <path
+        android:strokeColor="#D4BB8A"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M 35,81 Q 46,72 54,69 Q 63,71 71,77" />
+
+    <!-- ── Location pin body (cream teardrop) ── -->
+    <path
+        android:fillColor="#EAD8B8"
+        android:pathData="M 73,64 C 77.5,64 81,67.5 81,72 C 81,76.5 73,84 73,84 C 73,84 65,76.5 65,72 C 65,67.5 68.5,64 73,64 Z" />
+
+    <!-- ── Location pin inner dot (maroon) ── -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 73,68.5 A 2.8,2.8 0 1 0 73.001,68.5 Z" />
+
+    <!-- ── Partial circle arc – gap at upper-right where airplane exits ──
+         Arc from ~72° (64,18) counterclockwise to ~28° (82,35), covering ~316° of circle -->
+    <path
+        android:strokeColor="#7B1535"
+        android:strokeWidth="2.6"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M 64,18 A 32,32 0 1 0 82,35" />
+
+    <!-- ── Airplane trail / swoosh (curved stroke, right arm of V → airplane) ── -->
+    <path
+        android:strokeColor="#7B1535"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M 67,55 Q 77,38 83,27" />
+
+    <!-- ── 4-pointed compass star (gold) – upper left of circle ── -->
+    <path
+        android:fillColor="#C4A265"
+        android:pathData="M 38,27 L 40.5,33 L 46,36 L 40.5,39 L 38,45 L 35.5,39 L 30,36 L 35.5,33 Z" />
+
+    <!-- ── V letterform – left arm (maroon triangle) ── -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 21,22 L 33,22 L 54,77 Z" />
+
+    <!-- ── V letterform – right arm (maroon triangle) ── -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 75,22 L 87,22 L 54,77 Z" />
+
+    <!-- ── Serif caps on V (small horizontal brackets at tops of each arm) ── -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 17,22 L 37,22 L 37,25 L 17,25 Z" />
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 71,22 L 91,22 L 91,25 L 71,25 Z" />
+
+    <!-- ── Airplane silhouette (pointing upper-right) ── -->
+    <!-- Body -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 84,22 L 89,26 L 84,31 L 80,28 Z" />
+    <!-- Forward wing -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 82,26 L 76,21 L 80,27 Z" />
+    <!-- Tail fin -->
+    <path
+        android:fillColor="#7B1535"
+        android:pathData="M 84,30 L 89,33 L 84,32 Z" />
+
 </vector>
