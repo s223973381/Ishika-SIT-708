@@ -15,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,17 +26,22 @@ import com.example.voyage.R;
 import com.example.voyage.adapter.AiChatAdapter;
 import com.example.voyage.ai.AiRepository;
 import com.example.voyage.database.entities.AiChatMessage;
+import com.example.voyage.ui.island.SmartIsland;
+import com.example.voyage.util.AppContext;
+import com.example.voyage.util.ContextManager;
 import com.example.voyage.util.SessionManager;
 import com.example.voyage.viewmodel.AiChatViewModel;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AiChatFragment extends Fragment {
+
+    private static final long HISTORY_WINDOW_MS = TimeUnit.HOURS.toMillis(24);
 
     private AiChatViewModel viewModel;
     private AiChatAdapter adapter;
     private SessionManager session;
-    private Handler mainHandler;
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private EditText etMessage;
     private LinearLayout btnSend;
@@ -48,6 +51,7 @@ public class AiChatFragment extends Fragment {
 
     private AiRepository.Mode currentMode = AiRepository.Mode.AUTO;
     private boolean isSending = false;
+    private boolean welcomePosted = false;
 
     @Nullable
     @Override
@@ -62,10 +66,8 @@ public class AiChatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         session = new SessionManager(requireContext());
-        mainHandler = new Handler(Looper.getMainLooper());
         viewModel = new ViewModelProvider(this).get(AiChatViewModel.class);
 
-        // Load saved AI mode
         currentMode = AiRepository.fromString(session.getAiMode());
 
         bindViews(view);
@@ -74,17 +76,23 @@ public class AiChatFragment extends Fragment {
         setupInput();
         setupQuickChips(view);
         setupSettings(view);
+
+        // Purge messages older than 24 hours before observing
+        viewModel.deleteOlderThan(System.currentTimeMillis() - HISTORY_WINDOW_MS);
+
         observeMessages();
         animateEntrance(view);
     }
 
+    // ── Views ─────────────────────────────────────────────────────
+
     private void bindViews(View view) {
-        etMessage = view.findViewById(R.id.etMessage);
-        btnSend = view.findViewById(R.id.btnSend);
+        etMessage       = view.findViewById(R.id.etMessage);
+        btnSend         = view.findViewById(R.id.btnSend);
         typingIndicator = view.findViewById(R.id.typingIndicator);
-        tvModeName = view.findViewById(R.id.tvModeName);
-        tvModeIcon = view.findViewById(R.id.tvModeIcon);
-        rvMessages = view.findViewById(R.id.rvMessages);
+        tvModeName      = view.findViewById(R.id.tvModeName);
+        tvModeIcon      = view.findViewById(R.id.tvModeIcon);
+        rvMessages      = view.findViewById(R.id.rvMessages);
     }
 
     private void setupRecyclerView() {
@@ -102,7 +110,6 @@ public class AiChatFragment extends Fragment {
 
     private void setupInput() {
         btnSend.setOnClickListener(v -> sendMessage());
-
         etMessage.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEND
                     || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
@@ -131,33 +138,35 @@ public class AiChatFragment extends Fragment {
         view.findViewById(R.id.btnAiSettings).setOnClickListener(v -> showSettingsDialog());
     }
 
+    // ── Messages ──────────────────────────────────────────────────
+
     private void observeMessages() {
         viewModel.getGlobalMessages().observe(getViewLifecycleOwner(), messages -> {
             adapter.setMessages(messages);
-            if (messages != null && !messages.isEmpty()) {
-                rvMessages.smoothScrollToPosition(messages.size() - 1);
-            }
 
-            // Show welcome message if chat is empty
-            if (messages == null || messages.isEmpty()) {
-                postWelcomeMessage();
+            if (messages != null && !messages.isEmpty()) {
+                welcomePosted = false;
+                rvMessages.scrollToPosition(messages.size() - 1);
+            } else if (!welcomePosted) {
+                // Post the welcome message once; guard prevents duplicate inserts
+                welcomePosted = true;
+                mainHandler.post(this::postWelcomeMessage);
             }
         });
     }
 
     private void postWelcomeMessage() {
-        // Insert a welcome AI message so the screen isn't blank
+        if (!isAdded()) return;
         AiChatMessage welcome = new AiChatMessage();
-        welcome.sender = "ai";
-        welcome.message = "👋 Hi! I'm Voyage AI, your travel companion.\n\n"
+        welcome.sender    = "ai";
+        welcome.message   = "👋 Hi! I'm Voyage AI, your travel companion.\n\n"
                 + "I can help you:\n"
                 + "• Plan your day and itinerary\n"
                 + "• Create packing checklists\n"
                 + "• Give budget-saving tips\n"
-                + "• Summarise journal entries\n"
                 + "• Answer travel questions\n\n"
                 + "Tap a quick prompt below or type your own question!";
-        welcome.aiMode = AiRepository.toString(currentMode);
+        welcome.aiMode    = AiRepository.toString(currentMode);
         welcome.timestamp = System.currentTimeMillis();
         viewModel.sendMessage(welcome);
     }
@@ -166,6 +175,8 @@ public class AiChatFragment extends Fragment {
         etMessage.setText(text);
         sendMessage();
     }
+
+    // ── Send ──────────────────────────────────────────────────────
 
     private void sendMessage() {
         if (isSending) {
@@ -179,27 +190,36 @@ public class AiChatFragment extends Fragment {
         etMessage.setText("");
         isSending = true;
 
-        // Save user message
         AiChatMessage userMsg = new AiChatMessage();
-        userMsg.sender = "user";
-        userMsg.message = text;
-        userMsg.aiMode = AiRepository.toString(currentMode);
+        userMsg.sender    = "user";
+        userMsg.message   = text;
+        userMsg.aiMode    = AiRepository.toString(currentMode);
         userMsg.timestamp = System.currentTimeMillis();
         viewModel.sendMessage(userMsg);
 
-        // Show typing
         typingIndicator.setVisibility(View.VISIBLE);
         btnSend.setAlpha(0.5f);
 
-        // Call AI
-        AiRepository.sendMessage(requireContext(), text, currentMode, new AiRepository.AiCallback() {
+        // Prepend context (location, weather, time, preference) when available
+        String contextPrefix = ContextManager.buildAiContext(
+                AppContext.currentCity,
+                AppContext.weatherDescription,
+                ContextManager.getHour(),
+                session.getTravelStyle());
+        boolean hasContext = !AppContext.currentCity.isEmpty()
+                || !AppContext.weatherDescription.isEmpty()
+                || !session.getTravelStyle().isEmpty();
+        String fullPrompt = hasContext ? contextPrefix + text : text;
+
+        AiRepository.sendMessage(requireContext(), fullPrompt, currentMode, new AiRepository.AiCallback() {
             @Override
             public void onResponse(String responseText, String usedMode) {
                 mainHandler.post(() -> {
+                    if (!isAdded()) return;
                     AiChatMessage aiMsg = new AiChatMessage();
-                    aiMsg.sender = "ai";
-                    aiMsg.message = responseText;
-                    aiMsg.aiMode = usedMode;
+                    aiMsg.sender    = "ai";
+                    aiMsg.message   = responseText;
+                    aiMsg.aiMode    = usedMode;
                     aiMsg.timestamp = System.currentTimeMillis();
                     viewModel.sendMessage(aiMsg);
                     finishSending();
@@ -209,10 +229,11 @@ public class AiChatFragment extends Fragment {
             @Override
             public void onError(String error) {
                 mainHandler.post(() -> {
+                    if (!isAdded()) return;
                     AiChatMessage errMsg = new AiChatMessage();
-                    errMsg.sender = "ai";
-                    errMsg.message = "⚠️ " + error;
-                    errMsg.aiMode = AiRepository.toString(currentMode);
+                    errMsg.sender    = "ai";
+                    errMsg.message   = "⚠️ " + error;
+                    errMsg.aiMode    = AiRepository.toString(currentMode);
                     errMsg.timestamp = System.currentTimeMillis();
                     viewModel.sendMessage(errMsg);
                     finishSending();
@@ -222,15 +243,17 @@ public class AiChatFragment extends Fragment {
     }
 
     private void finishSending() {
-        typingIndicator.setVisibility(View.GONE);
-        btnSend.setAlpha(1.0f);
+        if (typingIndicator != null) typingIndicator.setVisibility(View.GONE);
+        if (btnSend != null)        btnSend.setAlpha(1.0f);
         isSending = false;
     }
 
+    // ── Dialogs ───────────────────────────────────────────────────
+
     private void showModeDialog() {
         String[] options = {"🤖 Auto (smart routing)", "📴 Offline (Ollama)", "🌐 Online (ChatGPT)"};
-        int checked = currentMode == AiRepository.Mode.AUTO ? 0
-                    : currentMode == AiRepository.Mode.OFFLINE ? 1 : 2;
+        int checked = currentMode == AiRepository.Mode.OFFLINE ? 1
+                    : currentMode == AiRepository.Mode.ONLINE  ? 2 : 0;
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("AI Mode")
@@ -238,12 +261,21 @@ public class AiChatFragment extends Fragment {
                 .setPositiveButton("Select", (d, w) -> {
                     int sel = ((AlertDialog) d).getListView().getCheckedItemPosition();
                     switch (sel) {
-                        case 0: currentMode = AiRepository.Mode.AUTO; break;
-                        case 1: currentMode = AiRepository.Mode.OFFLINE; break;
-                        case 2: currentMode = AiRepository.Mode.ONLINE; break;
+                        case 1:  currentMode = AiRepository.Mode.OFFLINE; break;
+                        case 2:  currentMode = AiRepository.Mode.ONLINE;  break;
+                        default: currentMode = AiRepository.Mode.AUTO;    break;
                     }
                     session.setAiMode(AiRepository.toString(currentMode));
                     updateModeUI();
+                    // Island: confirm mode switch
+                    String icon = sel == 1 ? "📴" : sel == 2 ? "🌐" : "🤖";
+                    String desc = sel == 1 ? "Using Ollama offline"
+                                : sel == 2 ? "Using ChatGPT online"
+                                : "Auto-routing based on connection";
+                    SmartIsland.show(requireActivity(), new SmartIsland.Config()
+                            .icon(icon).title("AI mode changed")
+                            .subtitle(desc)
+                            .autoDismiss(4000));
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
@@ -255,36 +287,39 @@ public class AiChatFragment extends Fragment {
         etHost.setText(session.getOllamaHost());
 
         EditText etModel = new EditText(requireContext());
-        etModel.setHint("Model (e.g. llama3.2)");
+        etModel.setHint("Model (e.g. llama3.2:1b)");
         etModel.setText(session.getOllamaModel());
 
         LinearLayout layout = new LinearLayout(requireContext());
         layout.setOrientation(LinearLayout.VERTICAL);
-        int pad = (int) (16 * requireContext().getResources().getDisplayMetrics().density);
+        int pad = Math.round(16 * requireContext().getResources().getDisplayMetrics().density);
         layout.setPadding(pad, pad, pad, 0);
         layout.addView(etHost);
         layout.addView(etModel);
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("⚙️ Ollama Settings")
-                .setMessage("Configure your local Ollama server.\n"
-                        + "Emulator: http://10.0.2.2:11434\n"
-                        + "Device: http://YOUR_PC_IP:11434")
+                .setMessage("Emulator: http://10.0.2.2:11434\n"
+                        + "Physical device: http://YOUR_PC_IP:11434\n"
+                        + "(run: ipconfig to find your PC IP)")
                 .setView(layout)
                 .setPositiveButton("Save", (d, w) -> {
-                    String host = etHost.getText().toString().trim();
+                    String host  = etHost.getText().toString().trim();
                     String model = etModel.getText().toString().trim();
-                    if (!host.isEmpty()) session.setOllamaHost(host);
+                    if (!host.isEmpty())  session.setOllamaHost(host);
                     if (!model.isEmpty()) session.setOllamaModel(model);
                     Toast.makeText(requireContext(), "Ollama settings saved", Toast.LENGTH_SHORT).show();
                 })
                 .setNeutralButton("Clear Chat", (d, w) -> {
+                    welcomePosted = false;
                     viewModel.clearGlobalChat();
                     Toast.makeText(requireContext(), "Chat cleared", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
+
+    // ── UI helpers ────────────────────────────────────────────────
 
     private void updateModeUI() {
         switch (currentMode) {
@@ -296,7 +331,6 @@ public class AiChatFragment extends Fragment {
                 tvModeName.setText("Online");
                 tvModeIcon.setText("🌐");
                 break;
-            case AUTO:
             default:
                 tvModeName.setText("Auto");
                 tvModeIcon.setText("🤖");

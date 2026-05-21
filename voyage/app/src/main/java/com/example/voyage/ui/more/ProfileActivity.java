@@ -108,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         LinearLayout rowLogout = findViewById(R.id.rowLogout);
 
         rowPreferences.setOnClickListener(v ->
-                Toast.makeText(this, "Preferences coming soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, PreferencesActivity.class)));
         rowPermissions.setOnClickListener(v -> openAppSettings());
         rowLogout.setOnClickListener(v -> showLogoutDialog());
     }

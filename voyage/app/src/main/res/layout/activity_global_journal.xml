@@ -79,6 +79,24 @@
         android:layout_marginTop="136dp"
         android:orientation="vertical">
 
+        <!-- Trip filter chips -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/voyage_warm_white"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/llTripChips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </HorizontalScrollView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

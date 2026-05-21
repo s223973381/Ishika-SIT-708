@@ -24,4 +24,7 @@ public interface AiChatMessageDao {
 
     @Query("DELETE FROM ai_chat_messages WHERE tripId = :tripId")
     void clearChatForTrip(int tripId);
+
+    @Query("DELETE FROM ai_chat_messages WHERE timestamp < :cutoffMs")
+    void deleteOlderThan(long cutoffMs);
 }

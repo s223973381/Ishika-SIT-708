@@ -16,20 +16,26 @@ public interface TripDao {
     @Delete
     void delete(Trip trip);
 
-    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 0 ORDER BY createdAt DESC")
+    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 0 ORDER BY startDate ASC")
     LiveData<List<Trip>> getUpcomingTrips(int userId);
 
-    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 1 ORDER BY createdAt DESC")
+    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 1 ORDER BY startDate DESC")
     LiveData<List<Trip>> getCompletedTrips(int userId);
 
-    @Query("SELECT * FROM trips WHERE userId = :userId ORDER BY createdAt DESC")
+    @Query("SELECT * FROM trips WHERE userId = :userId ORDER BY startDate ASC")
     LiveData<List<Trip>> getAllTrips(int userId);
 
     @Query("SELECT * FROM trips WHERE tripId = :tripId")
     LiveData<Trip> getTripById(int tripId);
 
-    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 0 ORDER BY createdAt DESC LIMIT 1")
-    LiveData<Trip> getLatestUpcomingTrip(int userId);
+    // Returns the trip closest to today: nearest future trip first, then nearest past trip.
+    @Query("SELECT * FROM trips WHERE userId = :userId AND isCompleted = 0 " +
+           "ORDER BY CASE WHEN startDate >= :today THEN 0 ELSE 1 END ASC, " +
+           "ABS(julianday(startDate) - julianday(:today)) ASC LIMIT 1")
+    LiveData<Trip> getLatestUpcomingTrip(int userId, String today);
+
+    @Query("SELECT * FROM trips WHERE tripId = :tripId")
+    Trip getTripByIdSync(int tripId);
 
     @Query("DELETE FROM trips WHERE tripId = :tripId")
     void deleteTripById(int tripId);

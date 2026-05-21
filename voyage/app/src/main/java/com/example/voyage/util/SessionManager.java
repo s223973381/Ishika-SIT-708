@@ -15,6 +15,12 @@ public class SessionManager {
     private static final String KEY_TRAVEL_STYLE = "travel_style";
     private static final String KEY_OLLAMA_HOST = "ollama_host";
     private static final String KEY_OLLAMA_MODEL = "ollama_model";
+    private static final String KEY_CURRENCY = "currency";
+    private static final String KEY_DISTANCE_UNIT = "distance_unit";
+    private static final String KEY_DATE_FORMAT = "date_format";
+    private static final String KEY_NOTIF_ENABLED = "notif_enabled";
+    private static final String KEY_NOTIF_REMINDERS = "notif_reminders";
+    private static final String KEY_NOTIF_TIPS = "notif_tips";
 
     private final SharedPreferences prefs;
 
@@ -104,6 +110,24 @@ public class SessionManager {
     public void updateUserName(String name) {
         prefs.edit().putString(KEY_USER_NAME, name).apply();
     }
+
+    public String getCurrency() { return prefs.getString(KEY_CURRENCY, "USD"); }
+    public void setCurrency(String c) { prefs.edit().putString(KEY_CURRENCY, c).apply(); }
+
+    public String getDistanceUnit() { return prefs.getString(KEY_DISTANCE_UNIT, "km"); }
+    public void setDistanceUnit(String u) { prefs.edit().putString(KEY_DISTANCE_UNIT, u).apply(); }
+
+    public String getDateFormat() { return prefs.getString(KEY_DATE_FORMAT, "DD/MM/YYYY"); }
+    public void setDateFormat(String f) { prefs.edit().putString(KEY_DATE_FORMAT, f).apply(); }
+
+    public boolean isNotifEnabled() { return prefs.getBoolean(KEY_NOTIF_ENABLED, true); }
+    public void setNotifEnabled(boolean v) { prefs.edit().putBoolean(KEY_NOTIF_ENABLED, v).apply(); }
+
+    public boolean isNotifReminders() { return prefs.getBoolean(KEY_NOTIF_REMINDERS, true); }
+    public void setNotifReminders(boolean v) { prefs.edit().putBoolean(KEY_NOTIF_REMINDERS, v).apply(); }
+
+    public boolean isNotifTips() { return prefs.getBoolean(KEY_NOTIF_TIPS, true); }
+    public void setNotifTips(boolean v) { prefs.edit().putBoolean(KEY_NOTIF_TIPS, v).apply(); }
 
     public void logout() {
         prefs.edit()

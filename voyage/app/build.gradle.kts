@@ -1,11 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
+}
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
 }
 
 android {
     namespace = "com.example.voyage"
     compileSdk = 36
-
     defaultConfig {
         applicationId = "com.example.voyage"
         minSdk = 24
@@ -14,6 +21,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String", "OPENAI_API_KEY",
+            "\"${localProperties.getProperty("OPENAI_API_KEY", "")}\""
+        )
     }
 
     buildTypes {
@@ -32,6 +44,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -59,9 +72,20 @@ dependencies {
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
 
+    // Location
+    implementation(libs.play.services.location)
+
+    // OpenStreetMap (osmdroid)
+    implementation(libs.osmdroid.android)
+
     // Glide (image loading)
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
+
+    // Retrofit + Gson + OkHttp (ChatGPT / OpenAI)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
 
     // Testing
     testImplementation(libs.junit)

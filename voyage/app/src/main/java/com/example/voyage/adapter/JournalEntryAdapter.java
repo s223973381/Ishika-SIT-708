@@ -1,8 +1,11 @@
 package com.example.voyage.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +24,7 @@ public class JournalEntryAdapter extends RecyclerView.Adapter<JournalEntryAdapte
     }
 
     private List<JournalEntry> entries = new ArrayList<>();
-    private OnDeleteListener deleteListener;
+    private final OnDeleteListener deleteListener;
 
     public JournalEntryAdapter(OnDeleteListener deleteListener) {
         this.deleteListener = deleteListener;
@@ -53,6 +56,24 @@ public class JournalEntryAdapter extends RecyclerView.Adapter<JournalEntryAdapte
         h.btnDelete.setOnClickListener(v -> {
             if (deleteListener != null) deleteListener.onDelete(entry);
         });
+
+        String path = entry.imagePath;
+        if (path != null && !path.isEmpty()) {
+            h.ivPhoto.setVisibility(View.VISIBLE);
+            h.ivPhoto.setTag(path);
+            h.ivPhoto.setImageBitmap(null);
+            new Thread(() -> {
+                Bitmap bmp = BitmapFactory.decodeFile(path);
+                h.ivPhoto.post(() -> {
+                    if (path.equals(h.ivPhoto.getTag())) {
+                        h.ivPhoto.setImageBitmap(bmp);
+                    }
+                });
+            }).start();
+        } else {
+            h.ivPhoto.setVisibility(View.GONE);
+            h.ivPhoto.setImageBitmap(null);
+        }
     }
 
     @Override
@@ -63,11 +84,11 @@ public class JournalEntryAdapter extends RecyclerView.Adapter<JournalEntryAdapte
     private String moodEmoji(String mood) {
         if (mood == null) return "😊";
         switch (mood.toLowerCase()) {
-            case "excited": return "🤩";
-            case "tired": return "😴";
-            case "reflective": return "🤔";
+            case "excited":     return "🤩";
+            case "tired":       return "😴";
+            case "reflective":  return "🤔";
             case "adventurous": return "🧗";
-            default: return "😊";
+            default:            return "😊";
         }
     }
 
@@ -78,15 +99,17 @@ public class JournalEntryAdapter extends RecyclerView.Adapter<JournalEntryAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMoodEmoji, tvTitle, tvDate, tvPreview, tvMoodBadge, btnDelete;
+        ImageView ivPhoto;
 
         ViewHolder(View v) {
             super(v);
             tvMoodEmoji = v.findViewById(R.id.tvMoodEmoji);
-            tvTitle = v.findViewById(R.id.tvEntryTitle);
-            tvDate = v.findViewById(R.id.tvEntryDate);
-            tvPreview = v.findViewById(R.id.tvEntryPreview);
+            tvTitle     = v.findViewById(R.id.tvEntryTitle);
+            tvDate      = v.findViewById(R.id.tvEntryDate);
+            tvPreview   = v.findViewById(R.id.tvEntryPreview);
             tvMoodBadge = v.findViewById(R.id.tvMoodBadge);
-            btnDelete = v.findViewById(R.id.btnDeleteEntry);
+            btnDelete   = v.findViewById(R.id.btnDeleteEntry);
+            ivPhoto     = v.findViewById(R.id.ivEntryPhoto);
         }
     }
 }

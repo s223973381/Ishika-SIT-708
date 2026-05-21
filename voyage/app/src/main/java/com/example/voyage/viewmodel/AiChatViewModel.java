@@ -41,4 +41,8 @@ public class AiChatViewModel extends AndroidViewModel {
     public void clearTripChat(int tripId) {
         executor.execute(() -> dao.clearChatForTrip(tripId));
     }
+
+    public void deleteOlderThan(long cutoffMs) {
+        executor.execute(() -> dao.deleteOlderThan(cutoffMs));
+    }
 }

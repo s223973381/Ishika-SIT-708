@@ -20,9 +20,11 @@ import com.example.voyage.database.entities.*;
         AiChatMessage.class,
         AiCache.class,
         EmergencyContact.class,
-        OfflineDownload.class
+        OfflineDownload.class,
+        PackingList.class,
+        PackingListItem.class
     },
-    version = 1,
+    version = 4,
     exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -40,6 +42,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract AiCacheDao aiCacheDao();
     public abstract EmergencyContactDao emergencyContactDao();
     public abstract OfflineDownloadDao offlineDownloadDao();
+    public abstract PackingListDao packingListDao();
+    public abstract PackingListItemDao packingListItemDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

@@ -10,6 +10,10 @@ import com.example.voyage.database.dao.TripDao;
 import com.example.voyage.database.entities.Trip;
 import com.example.voyage.util.SessionManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -42,7 +46,8 @@ public class TripViewModel extends AndroidViewModel {
     }
 
     public LiveData<Trip> getLatestUpcomingTrip() {
-        return tripDao.getLatestUpcomingTrip(session.getUserId());
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+        return tripDao.getLatestUpcomingTrip(session.getUserId(), today);
     }
 
     public void insertTrip(Trip trip, OnInsertCallback callback) {

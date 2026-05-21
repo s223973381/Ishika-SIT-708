@@ -33,6 +33,7 @@ public class OllamaClient {
                 body.put("model", model);
                 body.put("prompt", fullPrompt);
                 body.put("stream", false);
+                body.put("num_predict", 300);
 
                 URL url = new URL(host + "/api/generate");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -44,10 +44,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Tap + to add your first activity"
+            android:text="Tap ✨ Generate to let AI plan your trip"
             android:textColor="@color/voyage_text_secondary"
             android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="or tap + to add activities manually"
+            android:textColor="@color/voyage_text_hint"
+            android:textSize="13sp" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabGenerateAi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="20dp"
+        android:text="✨ Generate"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/voyage_olive_dark"
+        app:icon="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddItem"

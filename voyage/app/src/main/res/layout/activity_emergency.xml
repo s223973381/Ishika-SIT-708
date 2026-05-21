@@ -172,6 +172,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvHospitalName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-medium"
@@ -180,10 +181,11 @@
                                     android:textSize="15sp" />
 
                                 <TextView
+                                    android:id="@+id/tvHospitalDist"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="1.2 km away"
+                                    android:text="Locating..."
                                     android:textColor="@color/voyage_text_secondary"
                                     android:textSize="13sp" />
                             </LinearLayout>
@@ -230,6 +232,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvPoliceName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-medium"
@@ -238,10 +241,11 @@
                                     android:textSize="15sp" />
 
                                 <TextView
+                                    android:id="@+id/tvPoliceDist"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="2.0 km away"
+                                    android:text="Locating..."
                                     android:textColor="@color/voyage_text_secondary"
                                     android:textSize="13sp" />
                             </LinearLayout>

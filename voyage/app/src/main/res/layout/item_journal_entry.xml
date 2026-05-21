@@ -87,4 +87,13 @@
         android:text="Happy"
         android:textColor="@color/voyage_text_secondary"
         android:textSize="11sp" />
+
+    <!-- Photo (shown only when entry has an image) -->
+    <ImageView
+        android:id="@+id/ivEntryPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 </LinearLayout>

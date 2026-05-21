@@ -82,11 +82,11 @@ public class MoreFragment extends Fragment {
         view.findViewById(R.id.rowBudget).setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), GlobalBudgetActivity.class)));
         view.findViewById(R.id.rowPackingLists).setOnClickListener(v ->
-                Toast.makeText(requireContext(), "Packing Lists coming soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(requireContext(), PackingListsActivity.class)));
         view.findViewById(R.id.rowJournal).setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), GlobalJournalActivity.class)));
         view.findViewById(R.id.rowOfflineData).setOnClickListener(v ->
-                Toast.makeText(requireContext(), "Offline Data coming soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(requireContext(), OfflineDataActivity.class)));
 
         // Safety
         view.findViewById(R.id.rowEmergency).setOnClickListener(v ->

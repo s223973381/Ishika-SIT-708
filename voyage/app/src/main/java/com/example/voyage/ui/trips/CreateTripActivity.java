@@ -67,13 +67,13 @@ public class CreateTripActivity extends AppCompatActivity {
         btnStartDate.setOnClickListener(v -> pickDate(true));
         btnEndDate.setOnClickListener(v -> pickDate(false));
 
-        setStyleChip(styleRelax, "Relax");
+        initStyleFromProfile();
         styleRelax.setOnClickListener(v -> setStyleChip(styleRelax, "Relax"));
         styleAdventure.setOnClickListener(v -> setStyleChip(styleAdventure, "Adventure"));
         styleCulture.setOnClickListener(v -> setStyleChip(styleCulture, "Culture"));
         styleBudget.setOnClickListener(v -> setStyleChip(styleBudget, "Budget"));
 
-        setAiModeChip(aiModeAuto, "auto");
+        initAiModeFromProfile();
         aiModeAuto.setOnClickListener(v -> setAiModeChip(aiModeAuto, "auto"));
         aiModeOffline.setOnClickListener(v -> setAiModeChip(aiModeOffline, "offline"));
         aiModeOnline.setOnClickListener(v -> setAiModeChip(aiModeOnline, "online"));
@@ -131,6 +131,27 @@ public class CreateTripActivity extends AppCompatActivity {
         } catch (Exception e) {
             return 1;
         }
+    }
+
+    private void initStyleFromProfile() {
+        String styleStr = session.getTravelStyle();
+        if (!styleStr.isEmpty()) {
+            for (String s : styleStr.split(",")) {
+                switch (s.trim()) {
+                    case "Adventure": setStyleChip(styleAdventure, "Adventure"); return;
+                    case "Culture":   setStyleChip(styleCulture, "Culture");     return;
+                    case "Budget":    setStyleChip(styleBudget, "Budget");       return;
+                }
+            }
+        }
+        setStyleChip(styleRelax, "Relax");
+    }
+
+    private void initAiModeFromProfile() {
+        String mode = session.getAiMode();
+        if ("offline".equals(mode))     setAiModeChip(aiModeOffline, "offline");
+        else if ("online".equals(mode)) setAiModeChip(aiModeOnline, "online");
+        else                            setAiModeChip(aiModeAuto, "auto");
     }
 
     private void setStyleChip(TextView selected, String style) {

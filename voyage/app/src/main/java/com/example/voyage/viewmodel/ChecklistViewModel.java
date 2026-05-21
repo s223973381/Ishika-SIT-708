@@ -38,6 +38,10 @@ public class ChecklistViewModel extends AndroidViewModel {
         executor.execute(() -> dao.setChecked(id, checked));
     }
 
+    public void updateItem(ChecklistItem item) {
+        executor.execute(() -> dao.update(item));
+    }
+
     public void deleteItem(int id) {
         executor.execute(() -> dao.deleteById(id));
     }

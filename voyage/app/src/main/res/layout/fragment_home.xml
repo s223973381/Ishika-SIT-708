@@ -101,7 +101,62 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <!-- ── WEATHER CARD ── -->
+            <!-- ── CONTEXT STATUS ROW ── -->
+        <!-- Shown when: offline | battery < 25% | travel style set -->
+        <HorizontalScrollView
+            android:id="@+id/contextBannerScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:scrollbars="none"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chipConnectivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="📴 Offline · AI uses Ollama"
+                    android:textColor="@color/voyage_text_secondary"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/chipBattery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="🔋 Low Battery"
+                    android:textColor="@color/voyage_warning"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/chipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_selected"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="🧗 Adventure mode"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- ── WEATHER CARD ── -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/weatherCard"
                 android:layout_width="match_parent"
@@ -455,7 +510,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
-                android:text="Suggestions for You"
+                android:text="Context-Aware Suggestions"
                 android:textColor="@color/voyage_text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -481,6 +536,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvSugg1Emoji"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="☕"
@@ -494,19 +550,21 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvSugg1Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Café nearby"
+                            android:text="Looking for cafés…"
                             android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvSugg1Sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Patricia Coffee · 0.3 km away"
+                            android:text="Finding nearby spots…"
                             android:textColor="#CCFFFFFF"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -540,6 +598,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvSugg2Emoji"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🌦️"
@@ -553,19 +612,21 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvSugg2Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Weather alert"
+                            android:text="Checking weather…"
                             android:textColor="@color/voyage_text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvSugg2Sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Rain expected this afternoon"
+                            android:text="Fetching conditions…"
                             android:textColor="@color/voyage_text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>

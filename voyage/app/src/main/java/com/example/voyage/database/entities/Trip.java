@@ -1,18 +1,11 @@
 package com.example.voyage.database.entities;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(
     tableName = "trips",
-    foreignKeys = @ForeignKey(
-        entity = User.class,
-        parentColumns = "userId",
-        childColumns = "userId",
-        onDelete = ForeignKey.CASCADE
-    ),
     indices = @Index("userId")
 )
 public class Trip {

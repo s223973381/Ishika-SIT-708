@@ -30,7 +30,18 @@ public class ItineraryViewModel extends AndroidViewModel {
         executor.execute(() -> dao.insert(item));
     }
 
+    public void updateItem(ItineraryItem item) {
+        executor.execute(() -> dao.update(item));
+    }
+
     public void deleteItem(ItineraryItem item) {
         executor.execute(() -> dao.delete(item));
+    }
+
+    public void replaceItems(int tripId, List<ItineraryItem> items) {
+        executor.execute(() -> {
+            dao.deleteAllForTrip(tripId);
+            dao.insertAll(items);
+        });
     }
 }
