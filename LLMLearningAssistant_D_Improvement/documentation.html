@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LLM Learning Assistant — Code Documentation</title>
+<style>
+  /* ── Page setup ── */
+  @page { margin: 20mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    color: #2d3436;
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #9ddbcb 0%, #ffcdb5 60%, #ff8b94 100%);
+    page-break-after: always;
+    padding: 40px;
+  }
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    margin-bottom: 12px;
+  }
+  .cover h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    margin-bottom: 32px;
+  }
+  .cover .meta {
+    background: rgba(255,255,255,0.35);
+    border-radius: 12px;
+    padding: 18px 36px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 2;
+  }
+  .cover .meta strong { font-weight: 700; }
+
+  /* ── TOC ── */
+  .toc {
+    padding: 40px 48px;
+    page-break-after: always;
+  }
+  .toc h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff8b94;
+    border-bottom: 2px solid #ffcdb5;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+  .toc ol { padding-left: 22px; }
+  .toc li { margin: 6px 0; font-size: 13.5px; }
+  .toc li a { color: #2d3436; text-decoration: none; }
+  .toc li a:hover { color: #ff8b94; }
+  .toc .sub { margin-left: 20px; list-style-type: lower-alpha; }
+
+  /* ── Section headers ── */
+  .section-header {
+    background: linear-gradient(90deg, #9ddbcb, #daedb5);
+    padding: 14px 24px;
+    border-radius: 8px;
+    margin: 36px 0 20px 0;
+    page-break-before: always;
+  }
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3436;
+  }
+  .section-header p {
+    font-size: 12px;
+    color: #636e72;
+    margin-top: 2px;
+  }
+
+  /* ── File cards ── */
+  .file-card {
+    border: 1.5px solid #ffcdb5;
+    border-radius: 10px;
+    margin: 24px 0;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .file-header {
+    background: #fff5f0;
+    padding: 12px 18px;
+    border-bottom: 1px solid #ffcdb5;
+  }
+  .file-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ff8b94;
+    font-family: 'Courier New', monospace;
+  }
+  .file-desc {
+    padding: 12px 18px;
+    color: #2d3436;
+    font-size: 13px;
+    background: #fffcfb;
+    border-bottom: 1px solid #ffe8de;
+  }
+  .file-body { padding: 14px 18px; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 6px;
+  }
+  thead tr { background: #9ddbcb; }
+  thead th {
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+    color: #2d3436;
+  }
+  tbody tr:nth-child(even) { background: #f9fffe; }
+  tbody tr:nth-child(odd)  { background: #ffffff; }
+  tbody td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #e8f8f4;
+    vertical-align: top;
+  }
+  tbody td:first-child {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #ff8b94;
+    white-space: nowrap;
+  }
+
+  /* ── Sub-label ── */
+  .label {
+    display: inline-block;
+    background: #ffaaa5;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .label.green  { background: #7dcaba; }
+  .label.cream  { background: #a8c97a; }
+  .label.peach  { background: #ffb89a; }
+
+  /* ── Content area ── */
+  .content { padding: 0 48px 48px 48px; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #b2bec3;
+    margin-top: 60px;
+    padding-top: 16px;
+    border-top: 1px solid #ffe8de;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ COVER ═══════════════════════════════════ -->
+<div class="cover">
+  <h1>LLM Learning Assistant</h1>
+  <h2>Complete Code Documentation</h2>
+  <div class="meta">
+    <strong>Package:</strong> com.example.llmlearningassistant<br/>
+    <strong>Language:</strong> Java + XML (Android Studio)<br/>
+    <strong>LLM Backend:</strong> Ollama — llama3.2:1b<br/>
+    <strong>Subject:</strong> SIT708 — Task 6.1D<br/>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ TOC ════════════════════════════════════ -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#java">Java Source Files</a>
+      <ol class="sub">
+        <li><a href="#login">LoginActivity.java</a></li>
+        <li><a href="#register">RegisterActivity.java</a></li>
+        <li><a href="#interest">InterestActivity.java</a></li>
+        <li><a href="#home">HomeActivity.java</a></li>
+        <li><a href="#quiz">QuizActivity.java</a></li>
+        <li><a href="#result">ResultActivity.java</a></li>
+        <li><a href="#llmservice">LLMService.java</a></li>
+        <li><a href="#quizdata">QuizData.java</a></li>
+      </ol>
+    </li>
+    <li><a href="#res">Resource Files (res/)</a>
+      <ol class="sub">
+        <li><a href="#layouts">Layout files</a></li>
+        <li><a href="#drawables">Drawable files</a></li>
+        <li><a href="#anims">Animation files</a></li>
+        <li><a href="#values">Values files</a></li>
+        <li><a href="#manifest">AndroidManifest.xml</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════ JAVA FILES ════════════════════════════════════ -->
+<div class="content">
+
+  <div class="section-header" id="java">
+    <h2>Part 1 — Java Source Files</h2>
+    <p>All Activity classes and service/data helpers in com.example.llmlearningassistant</p>
+  </div>
+
+  <!-- LoginActivity -->
+  <div class="file-card" id="login">
+    <div class="file-header"><h3>LoginActivity.java</h3></div>
+    <div class="file-desc">
+      The entry point of the app that presents the login form to the user.
+      It validates credentials and navigates to the Home screen on success, or to Register if the user is new.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Inflates the login layout, binds views, attaches the fade-in animation to the card, and sets up click listeners for the Login button and "Need an Account?" link.</td></tr>
+          <tr><td>attemptLogin()</td><td>Reads and trims the username and password fields, shows inline errors if empty, checks against dummy credentials (student / password), and navigates to HomeActivity on success or shows a Toast on failure.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RegisterActivity -->
+  <div class="file-card" id="register">
+    <div class="file-header"><h3>RegisterActivity.java</h3></div>
+    <div class="file-desc">
+      Handles new user account creation by collecting six input fields and validating them before proceeding.
+      On success it navigates forward to the Interest selection screen.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Inflates the register layout, binds all six EditText fields and the Create Account button, applies the fade-in animation, and wires the button listener.</td></tr>
+          <tr><td>onSupportNavigateUp()</td><td>Handles the system back arrow so the user can return to LoginActivity from the Register screen.</td></tr>
+          <tr><td>attemptRegister()</td><td>Validates all six fields (empty checks, email match, password match) and navigates to InterestActivity on success, passing the username as an intent extra.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- InterestActivity -->
+  <div class="file-card" id="interest">
+    <div class="file-header"><h3>InterestActivity.java</h3></div>
+    <div class="file-desc">
+      Displays a scrollable grid of topic chips the user can tap to select their learning interests (up to 10).
+      The selected topics are passed to HomeActivity to personalise the quiz content.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Inflates the layout, retrieves the username from the intent, calls buildChips(), and sets up the Next button to pass the selected topics to HomeActivity.</td></tr>
+          <tr><td>buildChips()</td><td>Iterates over the 12 topic strings, creates a styled Material Chip for each one, attaches a checked-change listener that enforces the 10-topic maximum, and adds each chip to the ChipGroup.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HomeActivity -->
+  <div class="file-card" id="home">
+    <div class="file-header"><h3>HomeActivity.java</h3></div>
+    <div class="file-desc">
+      The main dashboard screen that greets the user, shows the current learning task based on their top selected interest,
+      and provides two LLM-powered learning tools — Generate Hint and Explain Answer — with a custom prompt input field.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Reads username and interests from the intent, picks the first interest as currentTopic, populates the task card title and description from QuizData, and wires all three buttons and both LLM utilities.</td></tr>
+          <tr><td>showLoading()</td><td>Displays the prompt text and the "Loading…" label, hides the response and error views, and disables both LLM buttons to prevent double-tapping.</td></tr>
+          <tr><td>showResponse()</td><td>Hides the loading label, makes the response TextView visible, sets its text, re-enables the buttons, and starts a fade-in animation on the response view.</td></tr>
+          <tr><td>showError()</td><td>Hides the loading label, shows the error message in the error TextView, and re-enables both LLM buttons.</td></tr>
+          <tr><td>onBackPressed()</td><td>Calls finishAffinity() to close the entire back stack rather than going back to the login screen after a successful login.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- QuizActivity -->
+  <div class="file-card" id="quiz">
+    <div class="file-header"><h3>QuizActivity.java</h3></div>
+    <div class="file-desc">
+      Presents three multiple-choice questions for the topic received from HomeActivity.
+      Provides an LLM-powered hint button with a custom prompt input field, validates answers, and passes results to ResultActivity.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Reads the topic from the intent, loads its questions from QuizData, calls populateQuestion() for all three cards, and wires the Generate Hint and Submit buttons.</td></tr>
+          <tr><td>populateQuestion()</td><td>Sets the question text on the label TextView, clears the RadioGroup, then creates and styles a RadioButton for each answer option and adds it to the group.</td></tr>
+          <tr><td>submitQuiz()</td><td>Reads the selected index from each RadioGroup, shows a Toast if any question is unanswered, then bundles question texts, student answers, and correct flags into an intent and starts ResultActivity.</td></tr>
+          <tr><td>getCheckedIndex()</td><td>Returns the zero-based index of the selected RadioButton within a given RadioGroup, or -1 if nothing is selected.</td></tr>
+          <tr><td>showLoading()</td><td>Displays the prompt text and loading label, hides response and error views, and disables the Generate Hint button.</td></tr>
+          <tr><td>showResponse()</td><td>Hides the loading label, displays the LLM hint response with a fade-in animation, and re-enables the hint button.</td></tr>
+          <tr><td>showError()</td><td>Hides the loading label, shows the error message, and re-enables the hint button.</td></tr>
+          <tr><td>onBackPressed()</td><td>Navigates back to HomeActivity using the default back behaviour with no slide transition.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ResultActivity -->
+  <div class="file-card" id="result">
+    <div class="file-header"><h3>ResultActivity.java</h3></div>
+    <div class="file-desc">
+      Displays the student's answers for all three questions with correct/incorrect labels.
+      The Explain Answer button builds a targeted LLM prompt that covers only the questions the student got wrong.
+    </div>
+    <div class="file-body">
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>onCreate()</td><td>Reads questions, answers, and correct flags from the intent, binds all views, calls populateResults(), and wires the Explain Answer and Continue buttons.</td></tr>
+          <tr><td>populateResults()</td><td>Dynamically creates a question TextView and an answer TextView for each of the three questions, colouring correct answers in mint-dark green and incorrect ones in error red, and adds them to the result LinearLayout.</td></tr>
+          <tr><td>explainWrongAnswers()</td><td>Loops through the correct[] array to collect all wrong questions, builds a specific LLM prompt listing each wrong Q&amp;A pair, and calls LLMService.query(); if all answers are correct it instead asks the LLM to confirm why each is right.</td></tr>
+          <tr><td>showLoading()</td><td>Displays the prompt text and loading label, hides response and error views, and disables the Explain Answer button.</td></tr>
+          <tr><td>showResponse()</td><td>Hides the loading label, shows the LLM explanation with a fade-in animation, and re-enables the button.</td></tr>
+          <tr><td>showError()</td><td>Hides the loading label and response view, shows the error message, and re-enables the button.</td></tr>
+          <tr><td>onBackPressed()</td><td>Returns to QuizActivity using the default back behaviour with no slide transition.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- LLMService -->
+  <div class="file-card" id="llmservice">
+    <div class="file-header"><h3>LLMService.java</h3></div>
+    <div class="file-desc">
+      A static service class that handles all HTTP communication with the local Ollama server running on port 11434.
+      Every network call is executed on a new background thread; results are delivered back via a callback interface.
+    </div>
+    <div class="file-body">
+      <span class="label">Interface</span>
+      <table>
+        <thead><tr><th>Member</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>LLMCallback</td><td>Defines onSuccess(String) and onError(String) so callers can receive the Ollama result on whichever thread they choose to dispatch to.</td></tr>
+        </tbody>
+      </table>
+      <br/>
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>generateHint()</td><td>Prepends a "give a short hint but not the full answer" instruction to the question text and forwards the assembled prompt to callOllama().</td></tr>
+          <tr><td>explainAnswer()</td><td>Builds a prompt that includes both the question and the student's answer and asks the model to explain clearly whether it is correct or incorrect.</td></tr>
+          <tr><td>query()</td><td>Passes a fully pre-built prompt straight to callOllama() without modification — used by ResultActivity which constructs its own multi-question prompt.</td></tr>
+          <tr><td>callOllama()</td><td>Spawns a new Thread, opens an HttpURLConnection to the Ollama API endpoint, POSTs a JSON body with the model name and prompt, reads the response stream, parses the "response" JSON field, and fires onSuccess or onError on the callback.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- QuizData -->
+  <div class="file-card" id="quizdata">
+    <div class="file-header"><h3>QuizData.java</h3></div>
+    <div class="file-desc">
+      A static data store that holds the question bank for all 12 interest topics.
+      Provides helper methods so any Activity can retrieve the correct questions and topic description by name.
+    </div>
+    <div class="file-body">
+      <span class="label">Inner Class</span>
+      <table>
+        <thead><tr><th>Member</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Question</td><td>Immutable data holder with three public final fields: text (the question string), options (String[] of answer choices), and correctIndex (zero-based index of the right answer).</td></tr>
+        </tbody>
+      </table>
+      <br/>
+      <span class="label">Methods</span>
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>static initialiser</td><td>Populates the BANK HashMap at class load time with three Question objects for each of the 12 topics: Algorithms, Data Structures, Web Development, Testing, Machine Learning, Databases, Networking, Operating Systems, Software Engineering, Mobile Development, Cybersecurity, and Cloud Computing.</td></tr>
+          <tr><td>getQuestions()</td><td>Looks up the given topic name in BANK and returns its Question[] array; falls back to the Algorithms set if the topic key is not found.</td></tr>
+          <tr><td>getDescription()</td><td>Returns a single descriptive sentence for the given topic used to populate the task card subtitle on the Home screen; falls back to a generic sentence if the topic is not listed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ RES FILES ═══════════════════════════ -->
+  <div class="section-header" id="res">
+    <h2>Part 2 — Resource Files (res/)</h2>
+    <p>Layouts, drawables, animations, values, and the AndroidManifest</p>
+  </div>
+
+  <!-- LAYOUTS -->
+  <div id="layouts">
+    <span class="label peach" style="font-size:12px; padding: 4px 12px;">res/layout/</span>
+
+    <!-- activity_login -->
+    <div class="file-card" style="margin-top:14px;">
+      <div class="file-header"><h3>activity_login.xml</h3></div>
+      <div class="file-desc">
+        The first screen the user sees. A ScrollView wraps a vertically centred form with a welcome heading,
+        two input fields, a Login button, and a "Need an Account?" text link.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>ScrollView</td><td>—</td><td>Allows the form to scroll on small screens.</td></tr>
+            <tr><td>LinearLayout</td><td>loginCard</td><td>Outer container that receives the fade-in entry animation.</td></tr>
+            <tr><td>EditText</td><td>etUsername</td><td>Plain-text input field for the username.</td></tr>
+            <tr><td>EditText</td><td>etPassword</td><td>Password input with textPassword type to mask characters.</td></tr>
+            <tr><td>Button</td><td>btnLogin</td><td>Triggers credential validation in LoginActivity.</td></tr>
+            <tr><td>TextView</td><td>tvNeedAccount</td><td>Clickable link that opens RegisterActivity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_register -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_register.xml</h3></div>
+      <div class="file-desc">
+        The account creation form. Six input fields are stacked inside a ScrollView with a single Create Account button at the bottom.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>EditText</td><td>etUsername</td><td>Username input field.</td></tr>
+            <tr><td>EditText</td><td>etEmail</td><td>Email address field with textEmailAddress input type.</td></tr>
+            <tr><td>EditText</td><td>etConfirmEmail</td><td>Confirms the email matches the field above.</td></tr>
+            <tr><td>EditText</td><td>etPassword</td><td>Password field with hidden characters.</td></tr>
+            <tr><td>EditText</td><td>etConfirmPassword</td><td>Confirms the password matches the field above.</td></tr>
+            <tr><td>EditText</td><td>etPhone</td><td>Phone number field with phone input type.</td></tr>
+            <tr><td>Button</td><td>btnCreateAccount</td><td>Triggers field validation and navigates to InterestActivity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_interest -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_interest.xml</h3></div>
+      <div class="file-desc">
+        Topic selection screen shown after registration. A ChipGroup inside a ScrollView lets topics wrap across rows, while the Next button is pinned below the scroll area.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>LinearLayout</td><td>interestCard</td><td>Animated container holding the heading text and chip group.</td></tr>
+            <tr><td>ChipGroup</td><td>chipGroup</td><td>Holds all 12 topic chips; chips are created and added at runtime in InterestActivity.</td></tr>
+            <tr><td>Button</td><td>btnNext</td><td>Fixed outside the scroll area; passes the selected topics list to HomeActivity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_home -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_home.xml</h3></div>
+      <div class="file-desc">
+        The main dashboard. Shows a personalised greeting, a dynamic task card, a free-text prompt input,
+        two LLM tool buttons, and four state views for the LLM request/response cycle.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>TextView</td><td>tvGreeting</td><td>Displays "Hello, [username]" set at runtime.</td></tr>
+            <tr><td>TextView</td><td>tvTaskDue</td><td>Shows the number of pending tasks.</td></tr>
+            <tr><td>TextView</td><td>tvTaskTitle</td><td>Displays the current topic name from the user's interests.</td></tr>
+            <tr><td>TextView</td><td>tvTaskDesc</td><td>One-line topic description populated from QuizData.getDescription().</td></tr>
+            <tr><td>Button</td><td>btnStartQuiz</td><td>Navigates to QuizActivity with the current topic.</td></tr>
+            <tr><td>EditText</td><td>etCustomPrompt</td><td>Optional free-text field; if filled, its content replaces the default question sent to Ollama.</td></tr>
+            <tr><td>Button</td><td>btnGenerateHint</td><td>Sends a hint request to Ollama using the typed or default question.</td></tr>
+            <tr><td>Button</td><td>btnExplainAnswer</td><td>Sends an explanation request to Ollama for the typed or default question.</td></tr>
+            <tr><td>TextView</td><td>tvPrompt</td><td>Shows the exact prompt text sent to the LLM (visible during and after the call).</td></tr>
+            <tr><td>TextView</td><td>tvLoading</td><td>"Loading…" label shown while the Ollama call is in progress.</td></tr>
+            <tr><td>TextView</td><td>tvResponse</td><td>Displays the LLM response text with a fade-in animation.</td></tr>
+            <tr><td>TextView</td><td>tvError</td><td>Displays any connection or server error in coral red.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_quiz -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_quiz.xml</h3></div>
+      <div class="file-desc">
+        Three multiple-choice question cards, each with a RadioGroup built at runtime. Includes a custom hint input,
+        an LLM Generate Hint button with state views, and a Submit button pinned at the bottom.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>TextView</td><td>tvTaskTitle</td><td>Shows the current topic name as the quiz heading.</td></tr>
+            <tr><td>TextView</td><td>tvQ1 / tvQ2 / tvQ3</td><td>Question text labels for each of the three questions, set at runtime.</td></tr>
+            <tr><td>RadioGroup</td><td>rgQ1 / rgQ2 / rgQ3</td><td>Container for each question's answer radio buttons; populated in Java.</td></tr>
+            <tr><td>EditText</td><td>etCustomHint</td><td>Optional custom question for the hint; defaults to Q1 text if left blank.</td></tr>
+            <tr><td>Button</td><td>btnGenerateHint</td><td>Sends a hint request to Ollama using the typed or default question.</td></tr>
+            <tr><td>TextView</td><td>tvPrompt</td><td>Shows the hint prompt sent to Ollama.</td></tr>
+            <tr><td>TextView</td><td>tvLoading</td><td>Visible while the hint LLM call is running.</td></tr>
+            <tr><td>TextView</td><td>tvResponse</td><td>Displays the hint response returned by Ollama.</td></tr>
+            <tr><td>TextView</td><td>tvError</td><td>Shows error messages if the Ollama call fails.</td></tr>
+            <tr><td>Button</td><td>btnSubmit</td><td>Validates all three answers are selected and launches ResultActivity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_result -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_result.xml</h3></div>
+      <div class="file-desc">
+        Results screen showing each question with a correct/incorrect label. The Explain Answer button targets
+        only wrong answers via a specific LLM prompt. Continue navigates back to Home.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>View</th><th>ID</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>LinearLayout</td><td>llResults</td><td>Empty container populated at runtime with a question + answer row per question.</td></tr>
+            <tr><td>Button</td><td>btnExplainAnswer</td><td>Triggers an LLM call that explains only the incorrectly answered questions.</td></tr>
+            <tr><td>TextView</td><td>tvPrompt</td><td>Shows the multi-question prompt built from wrong answers and sent to Ollama.</td></tr>
+            <tr><td>TextView</td><td>tvLoading</td><td>Visible while the explanation LLM call is running.</td></tr>
+            <tr><td>TextView</td><td>tvResponse</td><td>Displays the LLM explanation with a fade-in animation.</td></tr>
+            <tr><td>TextView</td><td>tvError</td><td>Shows error messages if the Ollama call fails.</td></tr>
+            <tr><td>Button</td><td>btnContinue</td><td>Navigates back to HomeActivity using FLAG_ACTIVITY_CLEAR_TOP.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- activity_main -->
+    <div class="file-card">
+      <div class="file-header"><h3>activity_main.xml</h3></div>
+      <div class="file-desc">
+        A minimal placeholder layout for MainActivity, which exists only to redirect the launcher intent to LoginActivity immediately. Contains no interactive views.
+      </div>
+    </div>
+  </div><!-- /layouts -->
+
+  <!-- DRAWABLES -->
+  <div id="drawables" style="margin-top:32px;">
+    <span class="label green" style="font-size:12px; padding: 4px 12px;">res/drawable/</span>
+
+    <div class="file-card" style="margin-top:14px;">
+      <div class="file-header"><h3>edit_text_bg.xml</h3></div>
+      <div class="file-desc">
+        Rounded rectangle used as the background for every EditText input field across the app.
+        Near-white fill with a salmon-coloured border and 10dp corner radius.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>solid</td><td>#FFFAF8 (near-white)</td><td>Soft white fill so text is clearly readable.</td></tr>
+            <tr><td>corners</td><td>10dp radius</td><td>Rounds corners to match the pastel design language.</td></tr>
+            <tr><td>stroke</td><td>1.5dp · #FFAAA5 (salmon)</td><td>Visible salmon border that ties the field to the palette.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>card_bg.xml</h3></div>
+      <div class="file-desc">
+        Rounded rectangle used as the background for task cards, question cards, and the prompt display area.
+        Peach fill with a slightly darker peach border and 14dp radius.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>solid</td><td>#FFECDE (soft peach)</td><td>Card fill colour from the pastel palette.</td></tr>
+            <tr><td>corners</td><td>14dp radius</td><td>Heavily rounded for a modern card appearance.</td></tr>
+            <tr><td>stroke</td><td>1dp · #FFCDB5 (peach border)</td><td>Subtle border that separates the card from the mint background.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>cream_card_bg.xml</h3></div>
+      <div class="file-desc">
+        Rounded rectangle used exclusively for the LLM response text area.
+        The cream-green colour visually distinguishes AI responses from surrounding peach cards.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>solid</td><td>#DAEDB5 (cream green)</td><td>Second palette colour reserved for LLM response areas.</td></tr>
+            <tr><td>corners</td><td>14dp radius</td><td>Matches the rounding of all other card backgrounds.</td></tr>
+            <tr><td>stroke</td><td>1dp · #C4DFA0 (darker green)</td><td>Subtle border to define the response box edge.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /drawables -->
+
+  <!-- ANIMS -->
+  <div id="anims" style="margin-top:32px;">
+    <span class="label" style="font-size:12px; padding: 4px 12px;">res/anim/</span>
+
+    <div class="file-card" style="margin-top:14px;">
+      <div class="file-header"><h3>fade_in.xml</h3></div>
+      <div class="file-desc">
+        Alpha animation from 0.0 to 1.0. Applied to screen containers on entry and to LLM response TextViews when they appear.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>duration</td><td>400ms</td></tr>
+            <tr><td>fromAlpha</td><td>0.0 (invisible)</td></tr>
+            <tr><td>toAlpha</td><td>1.0 (fully visible)</td></tr>
+            <tr><td>interpolator</td><td>accelerate_decelerate — starts and ends gently</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>slide_in_right.xml</h3></div>
+      <div class="file-desc">
+        Translate animation that moves the incoming screen from 100% right of the viewport to its final position.
+        Paired with slide_out_left on every forward navigation.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>duration</td><td>350ms</td></tr>
+            <tr><td>fromXDelta</td><td>100%p (off-screen right)</td></tr>
+            <tr><td>toXDelta</td><td>0 (final position)</td></tr>
+            <tr><td>interpolator</td><td>decelerate — slides in fast then settles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>slide_out_left.xml</h3></div>
+      <div class="file-desc">
+        Translate animation that moves the outgoing screen off to the left.
+        Paired with slide_in_right so both screens move together during forward navigation.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Property</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>duration</td><td>350ms</td></tr>
+            <tr><td>fromXDelta</td><td>0 (current position)</td></tr>
+            <tr><td>toXDelta</td><td>-100%p (off-screen left)</td></tr>
+            <tr><td>interpolator</td><td>accelerate — starts slow then exits quickly</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /anims -->
+
+  <!-- VALUES -->
+  <div id="values" style="margin-top:32px;">
+    <span class="label cream" style="font-size:12px; padding: 4px 12px;">res/values/</span>
+
+    <div class="file-card" style="margin-top:14px;">
+      <div class="file-header"><h3>colors.xml</h3></div>
+      <div class="file-desc">
+        Defines the full pastel colour palette used across every layout and drawable.
+        All colours are named semantically so swapping the palette requires changing only this file.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Name</th><th>Hex</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td>mint</td><td>#9DDBCB</td><td>All screen backgrounds.</td></tr>
+            <tr><td>mint_dark</td><td>#7DCABA</td><td>Correct answer labels in ResultActivity.</td></tr>
+            <tr><td>cream</td><td>#DAEDB5</td><td>LLM response card background (cream_card_bg).</td></tr>
+            <tr><td>peach</td><td>#FFCDB5</td><td>Task and question card backgrounds.</td></tr>
+            <tr><td>salmon</td><td>#FFAAA5</td><td>Secondary buttons and chip borders.</td></tr>
+            <tr><td>coral</td><td>#FF8B94</td><td>Primary action buttons (Login, Submit, Continue).</td></tr>
+            <tr><td>coral_dark</td><td>#F07080</td><td>"Generated by AI" label text.</td></tr>
+            <tr><td>text_dark</td><td>#2D3436</td><td>All primary body and heading text.</td></tr>
+            <tr><td>text_medium</td><td>#636E72</td><td>Subtitles, descriptions, and secondary text.</td></tr>
+            <tr><td>text_hint</td><td>#B2BEC3</td><td>EditText placeholder hint colour.</td></tr>
+            <tr><td>error_red</td><td>#E17055</td><td>Wrong answer labels and LLM error messages.</td></tr>
+            <tr><td>chip_unselected</td><td>#FFAAA5</td><td>Unselected interest chip background.</td></tr>
+            <tr><td>chip_selected</td><td>#FF8B94</td><td>Selected interest chip background.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>strings.xml</h3></div>
+      <div class="file-desc">
+        Stores all user-facing string literals referenced in layouts.
+        Centralising text here allows content changes and future translations without touching XML layout files.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Name</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>app_name</td><td>LLM Learning Assistant</td></tr>
+            <tr><td>btn_login</td><td>Login</td></tr>
+            <tr><td>btn_create_account</td><td>Create new Account</td></tr>
+            <tr><td>btn_generate_hint</td><td>Generate Hint</td></tr>
+            <tr><td>btn_explain_answer</td><td>Explain Answer</td></tr>
+            <tr><td>btn_submit</td><td>Submit</td></tr>
+            <tr><td>btn_continue</td><td>Continue</td></tr>
+            <tr><td>loading_text</td><td>Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-header"><h3>themes.xml &amp; values-night/themes.xml</h3></div>
+      <div class="file-desc">
+        Defines the Material3 app theme and overrides the primary colour slots to use the pastel palette.
+        The night variant forces the Light theme so pastel colours are preserved regardless of the device's dark-mode setting.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Style</th><th>Parent</th><th>Key overrides</th></tr></thead>
+          <tbody>
+            <tr><td>Base.Theme.LLMLearningAssistant</td><td>Theme.Material3.DayNight.NoActionBar</td><td>colorPrimary → coral, colorAccent → mint, windowBackground → mint.</td></tr>
+            <tr><td>Theme.LLMLearningAssistant</td><td>Base.Theme.LLMLearningAssistant</td><td>Inherits all base overrides — used directly by the Manifest.</td></tr>
+            <tr><td>Night variant</td><td>Theme.Material3.Light.NoActionBar</td><td>Forces the Light theme in dark mode so pastel backgrounds are not inverted.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /values -->
+
+  <!-- MANIFEST -->
+  <div id="manifest" style="margin-top:32px;">
+    <span class="label" style="background:#636e72; font-size:12px; padding: 4px 12px;">AndroidManifest.xml</span>
+    <div class="file-card" style="margin-top:14px;">
+      <div class="file-header"><h3>AndroidManifest.xml</h3></div>
+      <div class="file-desc">
+        The app configuration file declaring all activities, permissions, and the launcher entry point.
+        Two key additions beyond the default: the INTERNET permission for Ollama HTTP calls, and
+        usesCleartextTraffic="true" to allow plain HTTP to the local server on port 11434.
+      </div>
+      <div class="file-body">
+        <table>
+          <thead><tr><th>Declaration</th><th>Value</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>uses-permission INTERNET</td><td>—</td><td>Required for all HTTP calls to the Ollama server.</td></tr>
+            <tr><td>usesCleartextTraffic</td><td>true</td><td>Allows unencrypted HTTP to 10.0.2.2:11434 (emulator's localhost).</td></tr>
+            <tr><td>Launcher activity</td><td>LoginActivity</td><td>App opens directly on the Login screen when launched.</td></tr>
+            <tr><td>exported="false"</td><td>All other activities</td><td>Prevents other apps from launching internal screens directly.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /manifest -->
+
+  <div class="footer">
+    LLM Learning Assistant &nbsp;·&nbsp; SIT708 Task 6.1D &nbsp;·&nbsp; com.example.llmlearningassistant
+  </div>
+
+</div><!-- /content -->
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pastel palette from reference image -->
+    <color name="mint">#9DDBCB</color>
+    <color name="mint_dark">#7DCABA</color>
+    <color name="mint_light">#C2EDE5</color>
+    <color name="cream">#DAEDB5</color>
+    <color name="cream_dark">#C4DFA0</color>
+    <color name="peach">#FFCDB5</color>
+    <color name="peach_dark">#FFB89A</color>
+    <color name="salmon">#FFAAA5</color>
+    <color name="coral">#FF8B94</color>
+    <color name="coral_dark">#F07080</color>
+
+    <!-- Text colours (dark, since backgrounds are now light pastel) -->
+    <color name="text_dark">#2D3436</color>
+    <color name="text_medium">#636E72</color>
+    <color name="text_hint">#B2BEC3</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Semantic aliases kept for backward compat -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="error_red">#E17055</color>
+    <color name="loading_grey">#B2BEC3</color>
+
+    <!-- Chip colours -->
+    <color name="chip_unselected">#FFAAA5</color>
+    <color name="chip_selected">#FF8B94</color>
+</resources>
