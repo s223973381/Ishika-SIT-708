@@ -1,10 +1,9 @@
 package com.example.sportsnewsfeedapp.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,6 +20,9 @@ import com.example.sportsnewsfeedapp.adapter.FeaturedAdapter;
 import com.example.sportsnewsfeedapp.adapter.LatestNewsAdapter;
 import com.example.sportsnewsfeedapp.data.DummyData;
 import com.example.sportsnewsfeedapp.model.NewsItem;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +31,12 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerFeatured, recyclerLatest;
     private EditText etSearch;
+    private ChipGroup chipGroup;
     private LatestNewsAdapter latestNewsAdapter;
     private List<NewsItem> allNews;
+    private boolean updatingChipFromSearch = false;
 
     public HomeFragment() {
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -49,9 +47,21 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        MaterialToolbar toolbar = view.findViewById(R.id.toolbar);
         recyclerFeatured = view.findViewById(R.id.recyclerFeatured);
         recyclerLatest = view.findViewById(R.id.recyclerLatest);
         etSearch = view.findViewById(R.id.etSearch);
+        chipGroup = view.findViewById(R.id.chipGroup);
+
+        toolbar.inflateMenu(R.menu.top_menu);
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.menu_bookmarks) {
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_homeFragment_to_bookmarksFragment);
+                return true;
+            }
+            return false;
+        });
 
         allNews = DummyData.getNewsList();
 
@@ -72,10 +82,57 @@ public class HomeFragment extends Fragment {
         recyclerLatest.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerLatest.setAdapter(latestNewsAdapter);
 
-        etSearch.setOnEditorActionListener((v, actionId, event) -> {
-            filterNews(etSearch.getText().toString());
-            return true;
+        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (updatingChipFromSearch) return;
+            if (checkedIds.isEmpty()) return;
+
+            int checkedId = checkedIds.get(0);
+            String category = getCategoryForChip(checkedId);
+
+            etSearch.removeTextChangedListener(searchWatcher);
+            etSearch.setText(category);
+            etSearch.removeTextChangedListener(searchWatcher);
+            etSearch.addTextChangedListener(searchWatcher);
+
+            filterNews(category);
         });
+
+        etSearch.addTextChangedListener(searchWatcher);
+    }
+
+    private final TextWatcher searchWatcher = new TextWatcher() {
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String query = s.toString().trim();
+            filterNews(query);
+            updatingChipFromSearch = true;
+            selectChipForQuery(query);
+            updatingChipFromSearch = false;
+        }
+    };
+
+    private void selectChipForQuery(String query) {
+        if (query.isEmpty()) {
+            chipGroup.check(R.id.chipAll);
+        } else if (query.equalsIgnoreCase("Football")) {
+            chipGroup.check(R.id.chipFootball);
+        } else if (query.equalsIgnoreCase("Basketball")) {
+            chipGroup.check(R.id.chipBasketball);
+        } else if (query.equalsIgnoreCase("Cricket")) {
+            chipGroup.check(R.id.chipCricket);
+        } else {
+            chipGroup.check(R.id.chipAll);
+        }
+    }
+
+    private String getCategoryForChip(int chipId) {
+        if (chipId == R.id.chipFootball) return "Football";
+        if (chipId == R.id.chipBasketball) return "Basketball";
+        if (chipId == R.id.chipCricket) return "Cricket";
+        return "";
     }
 
     private void filterNews(String query) {
@@ -105,22 +162,5 @@ public class HomeFragment extends Fragment {
 
         Navigation.findNavController(view)
                 .navigate(R.id.action_homeFragment_to_detailFragment, bundle);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.top_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        View view = getView();
-        if (item.getItemId() == R.id.menu_bookmarks && view != null) {
-            Navigation.findNavController(view)
-                    .navigate(R.id.action_homeFragment_to_bookmarksFragment);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
