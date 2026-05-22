@@ -60,6 +60,10 @@ public class OfflineDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline_data);
 
+        // Use the same app-specific path as TripMapFragment so we read the correct cache
+        File extDir = getExternalFilesDir(null);
+        if (extDir == null) extDir = getFilesDir();
+        Configuration.getInstance().setOsmdroidBasePath(new File(extDir, "osmdroid"));
         Configuration.getInstance().setUserAgentValue(getPackageName());
 
         downloadDao = AppDatabase.getInstance(this).offlineDownloadDao();
@@ -166,8 +170,16 @@ public class OfflineDataActivity extends AppCompatActivity {
 
     private long getOsmCacheSize() {
         try {
-            File tilesDir = new File(Configuration.getInstance().getOsmdroidBasePath(), "tiles");
-            return folderSize(tilesDir);
+            File basePath = Configuration.getInstance().getOsmdroidBasePath();
+            if (basePath == null || !basePath.exists()) return 0;
+            long size = 0;
+            // osmdroid 6.x stores tiles in osmdroid.db (SqlTileWriter)
+            File dbFile = new File(basePath, "osmdroid.db");
+            if (dbFile.exists()) size += dbFile.length();
+            // Older/fallback file-based tile cache
+            File tilesDir = new File(basePath, "tiles");
+            if (tilesDir.exists()) size += folderSize(tilesDir);
+            return size;
         } catch (Exception e) {
             return 0;
         }
@@ -175,8 +187,12 @@ public class OfflineDataActivity extends AppCompatActivity {
 
     private void deleteOsmCache() {
         try {
-            File tilesDir = new File(Configuration.getInstance().getOsmdroidBasePath(), "tiles");
-            deleteDir(tilesDir);
+            File basePath = Configuration.getInstance().getOsmdroidBasePath();
+            if (basePath == null) return;
+            File dbFile = new File(basePath, "osmdroid.db");
+            if (dbFile.exists()) dbFile.delete();
+            File tilesDir = new File(basePath, "tiles");
+            if (tilesDir.exists()) deleteDir(tilesDir);
         } catch (Exception ignored) {}
     }
 

@@ -1,5 +1,6 @@
 package com.example.voyage.ui.trips;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +85,11 @@ public class TripMapFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Point osmdroid at app-specific external storage — no special permission needed
+        // on any Android version, and ensures OfflineDataActivity reads the same path.
+        File extDir = requireContext().getExternalFilesDir(null);
+        if (extDir == null) extDir = requireContext().getFilesDir();
+        Configuration.getInstance().setOsmdroidBasePath(new File(extDir, "osmdroid"));
         Configuration.getInstance().setUserAgentValue(requireContext().getPackageName());
         if (getArguments() != null) tripId = getArguments().getInt("trip_id", -1);
     }
@@ -221,6 +229,10 @@ public class TripMapFragment extends Fragment {
                 .create();
         progressDialog.show();
 
+        // Capture Activity reference now (safe to use from background callbacks).
+        // requireActivity() would throw if called after the fragment is detached.
+        Activity activity = requireActivity();
+
         cacheManager.downloadAreaAsync(requireContext(), tripBoundingBox, ZOOM_MIN, ZOOM_MAX,
                 new CacheManager.CacheManagerCallback() {
                     @Override
@@ -232,8 +244,8 @@ public class TripMapFragment extends Fragment {
                     @Override
                     public void updateProgress(int progress, int currentZoomLevel,
                                                int zoomMin, int zoomMax) {
-                        if (!isAdded()) return;
-                        requireActivity().runOnUiThread(() -> {
+                        activity.runOnUiThread(() -> {
+                            if (activity.isFinishing() || activity.isDestroyed()) return;
                             progressBar.setProgress(progress);
                             tvCount.setText(progress + " / " + totalTiles
                                     + " tiles  (zoom " + currentZoomLevel + ")");
@@ -242,12 +254,15 @@ public class TripMapFragment extends Fragment {
 
                     @Override
                     public void onTaskComplete() {
-                        if (!isAdded()) return;
-                        requireActivity().runOnUiThread(() -> {
-                            progressDialog.dismiss();
+                        // Write DB record here on CacheManager's background thread — before
+                        // posting to the main thread. This guarantees OfflineDataActivity
+                        // will see the record the moment the user navigates there.
+                        persistDownloadRecord();
+                        activity.runOnUiThread(() -> {
+                            safeDismiss(progressDialog);
                             isDownloading = false;
+                            if (!isAdded() || activity.isFinishing() || activity.isDestroyed()) return;
                             markButtonAsDownloaded();
-                            saveDownloadRecord();
                             Toast.makeText(requireContext(),
                                     "✓ Trip map saved for offline use", Toast.LENGTH_LONG).show();
                         });
@@ -255,12 +270,13 @@ public class TripMapFragment extends Fragment {
 
                     @Override
                     public void onTaskFailed(int errors) {
-                        if (!isAdded()) return;
-                        requireActivity().runOnUiThread(() -> {
-                            progressDialog.dismiss();
+                        // Save record even on partial failure — tiles that did download are usable.
+                        persistDownloadRecord();
+                        activity.runOnUiThread(() -> {
+                            safeDismiss(progressDialog);
                             isDownloading = false;
+                            if (!isAdded() || activity.isFinishing() || activity.isDestroyed()) return;
                             markButtonAsDownloaded();
-                            saveDownloadRecord();
                             String msg = errors == 0
                                     ? "✓ Trip map saved for offline use"
                                     : "✓ Trip map saved (" + errors + " tiles unavailable in this area)";
@@ -270,8 +286,15 @@ public class TripMapFragment extends Fragment {
                 });
     }
 
-    private void saveDownloadRecord() {
-        dbExecutor.execute(() -> {
+    private static void safeDismiss(AlertDialog dialog) {
+        try {
+            if (dialog != null && dialog.isShowing()) dialog.dismiss();
+        } catch (Exception ignored) {}
+    }
+
+    /** Called directly on CacheManager's background thread — Room allows this (non-main thread). */
+    private void persistDownloadRecord() {
+        try {
             OfflineDownload dl = offlineDownloadDao.getDownloadForTripSync(tripId);
             if (dl == null) {
                 dl = new OfflineDownload();
@@ -284,7 +307,7 @@ public class TripMapFragment extends Fragment {
                 dl.lastDownloadedAt = System.currentTimeMillis();
                 offlineDownloadDao.update(dl);
             }
-        });
+        } catch (Exception ignored) {}
     }
 
     private void markButtonAsDownloaded() {
